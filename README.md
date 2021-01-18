@@ -1,6 +1,6 @@
 # EbugTracker
 
-ABSTRACT
+# ABSTRACT
 For many years Bug Tracking mechanism was employed only in some  of the large software development houses. Most of the others never bothered  with bug tracking at all and instead simply relied on shared lists and email to  monitor the status of defects
 
 EBug Tracking System is a web-based application that is designed to  help quality assurance and programmers keep track of reported software bugs  in their work in the form of tickets. Tickets will be assigned to a person with a ticketid, flag,  description, project name and its details.
@@ -9,7 +9,7 @@ Nowadays, when projects are so extensive, defects or bugs have existed as a prob
 
 
 
-Introduction
+# Introduction
 EBug Tracking System is a web-based application that is designed  to help quality assurance and programmers keep track of reported  software bugs in their work..
 
 Bugs will be assigned to a person with a ticketid, flag, description, project name.
