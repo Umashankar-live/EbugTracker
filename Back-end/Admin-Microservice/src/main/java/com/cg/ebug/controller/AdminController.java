@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.ebug.entity.CriticalLevel_Table;
 import com.cg.ebug.entity.Project_Table;
@@ -17,7 +17,7 @@ import com.cg.ebug.entity.Status_Table;
 import com.cg.ebug.entity.Ticket_Table;
 import com.cg.ebug.service.IAdminService;
 
-@Controller
+@RestController
 public class AdminController {
 	
 	@Autowired

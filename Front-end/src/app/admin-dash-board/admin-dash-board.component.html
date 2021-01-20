@@ -1,0 +1,114 @@
+<div id="wrapper" class={{sidebarClass}} style="overflow-x: hidden;">
+    <div class="row">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav clickable"> <br>
+                <li class="sidebar-brand ">
+                    <a class="h2" (click)=adminRefresh()>
+                        <i class="fas fa-user-cog"></i> Admin
+                    </a>
+                    <hr>
+                </li>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/test/add" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+                    title="Add new test">
+                    <a routerLink='/admin/dashboard/test/add'><i class="fa fa-plus"></i> Register Employee</a>
+                </li>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/test/view" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+                    title="View all Tests">
+                    <a routerLink='/admin/dashboard/test/view'><i class="fa fa-table"></i> Send Solution</a>
+                </li>
+                <hr>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/center/add" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+                    title="Add new center">
+                    <a routerLink='center/add'><i class="fa fa-plus"></i> Add Project</a>
+                </li>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/center/view" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+                    title="View all centers">
+                    <a routerLink='center/view'><i class="fa fa-table"></i> View All Bug</a>
+                </li>
+                <hr>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/view" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+                    title="View all Appointments">
+                    <a routerLink='appointments/view'><i class="fa fa-table"></i> Assign Bug</a>
+                </li>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/pending" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+                    title="View Pending Details">
+                    <a routerLink='/admin/dashboard/appointments/pending'><i class="fas fa-hourglass-start"></i> Pending
+                        Requests</a>
+                </li>
+                <hr>
+                <li class="container" title="Log out">
+                    <button class="btn btn-transparent float-right" (click)='logOut()' style="color: #999999;"><i
+                            class="fa fa-power-off"></i>
+                        Logout</button>
+                </li>
+            </ul>
+            <!-- /#sidebar-wrapper -->
+        </div>
+        <div class="col-md-12">
+            <!-- Page Content -->
+            &nbsp;&nbsp; <div class={{menuToggleClass}} (click)='toggleClass()'>
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+
+            <div class="container">
+                <div *ngIf='router.url == "/admin/dashboard"' style="padding-top: 6em;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="h1 text-center">Overview</h1>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row container">
+                        <div class="card col-md-3">
+                            <div class="row">
+                                <div class="col-md-4 card-header" style="background-color: darkslategrey;">
+                                    <h1 style="color: whitesmoke;">
+                                        {{ testCount }}
+                                        <div *ngIf='isLoadingCount' class="spinner spinner-grow"></div>
+                                    </h1>
+                                </div>
+                                <div class="col-md-8 card-body">
+                                    <p class="h4">Total No. of Projects</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="card col-md-3">
+                            <div class="row">
+                                <div class="col-md-4 card-header" style="background-color: darkslategrey;">
+                                    <h1 style="color: whitesmoke;">
+                                        {{centerCount}}
+                                        <div *ngIf='isLoadingCenters' class="spinner spinner-grow"></div>
+                                    </h1>
+                                </div>
+                                <div class="col-md-8 card-body">
+                                    <p class="h4"> Total No. of Employees </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="card col-md-3">
+                            <div class="row">
+                                <div class="col-md-4 card-header" style="background-color: darkslategrey;">
+                                    <h1 style="color: whitesmoke;">
+                                        {{pendingCount}}
+                                        <div *ngIf='isLoadingPending' class="spinner spinner-grow"></div>
+                                    </h1>
+                                </div>
+                                <div class="col-md-8 card-body">
+                                    <p class="h4">Pending Requests</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                <router-outlet></router-outlet>
+            </div>
+            <!-- /#page-content-wrapper -->
+        </div>
+    </div>
+</div>
