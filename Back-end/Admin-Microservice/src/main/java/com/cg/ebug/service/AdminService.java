@@ -9,18 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.ebug.dao.CriticalLevel_Repository;
+import com.cg.ebug.dao.Employee_Repositroy;
 import com.cg.ebug.dao.Project_Repository;
 import com.cg.ebug.dao.Status_Repository;
 import com.cg.ebug.dao.Ticket_Repository;
 import com.cg.ebug.entity.CriticalLevel_Table;
+import com.cg.ebug.entity.Employee_Table;
 import com.cg.ebug.entity.Project_Table;
 import com.cg.ebug.entity.Status_Table;
 import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.exception.EbugException;
 
 @Service
 @Transactional
-public class AdminService implements IAdminService{
-	
+public class AdminService implements IAdminService {
+
 	@Autowired
 	private Ticket_Repository ticketRepository;
 	@Autowired
@@ -29,72 +32,48 @@ public class AdminService implements IAdminService{
 	private CriticalLevel_Repository criticalRepository;
 	@Autowired
 	private Project_Repository projectRepository;
-	
+	@Autowired
+	private Employee_Repositroy employeeRepository;
 
 	@Override
 	public List<Ticket_Table> getAllTickets() {
 		// TODO Auto-generated method stub
 		List<Ticket_Table> ticketList = ticketRepository.findAll();
 
-		if(ticketList.size() == 0) {
+		if (ticketList.size() == 0) {
 			return null;
 		} else {
 			return ticketList;
 		}
 	}
-	
+
 	@Override
 	public List<Ticket_Table> getTicketByStatusId(Long id) {
 		// TODO Auto-generated method stub
 		try {
 			List<Ticket_Table> ticketList = ticketRepository.FindTicketByStatusId(id);
-			if(ticketList.size() == 0) {
+			if (ticketList.size() == 0) {
 				return null;
 			} else {
 				return ticketList;
 			}
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
 
 	}
 
-	@Override
-	public Ticket_Table createTicket(Ticket_Table ticket) {
-		// TODO Auto-generated method stub
-		try {
-			return ticketRepository.save(ticket);
-		}catch(Exception ex) {
-			System.out.println(ex);
-			return null;
-		}
-		
-	}
-	
-	
 	@Override
 	public List<Status_Table> getAllStatus() {
 		// TODO Auto-generated method stub
 		try {
 			return statusRepository.findAll();
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
-		
-	}
 
-	@Override
-	public Status_Table addStatus(Status_Table status) {
-		// TODO Auto-generated method stub
-		return statusRepository.save(status);
-	}
-	
-	@Override
-	public CriticalLevel_Table addCriticalLevel(CriticalLevel_Table critical) {
-		// TODO Auto-generated method stub
-		return criticalRepository.save(critical);
 	}
 
 	@Override
@@ -102,7 +81,7 @@ public class AdminService implements IAdminService{
 		try {
 			ticket.setIsUpdatedByAdmin(true);
 			return ticketRepository.save(ticket);
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
@@ -116,10 +95,18 @@ public class AdminService implements IAdminService{
 
 	@Override
 	public Project_Table addProject(Project_Table project) {
-		// TODO Auto-generated method stub
+
 		try {
+
+			List<Project_Table> projectList = projectRepository.findAll();
+			for (Project_Table isExists : projectList) {
+				if (isExists.getProjectName().equalsIgnoreCase(project.getProjectName())) {
+					throw new EbugException("Project already Exists");
+				}
+			}
+
 			return projectRepository.save(project);
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
@@ -129,7 +116,7 @@ public class AdminService implements IAdminService{
 	public List<Project_Table> getAllProject() {
 		try {
 			return projectRepository.findAll();
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
@@ -139,9 +126,9 @@ public class AdminService implements IAdminService{
 	public Project_Table getProjectByID(Long id) {
 		try {
 			Optional<Project_Table> data = projectRepository.findById(id);
-			if(data.isPresent())
-			return data.get();
-		}catch(Exception ex) {
+			if (data.isPresent())
+				return data.get();
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
@@ -153,12 +140,12 @@ public class AdminService implements IAdminService{
 		// TODO Auto-generated method stub
 		try {
 			List<Ticket_Table> ticketList = ticketRepository.FindTicketByCriticalLevelId(id);
-			if(ticketList.size() == 0) {
+			if (ticketList.size() == 0) {
 				return null;
 			} else {
 				return ticketList;
 			}
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
@@ -169,12 +156,12 @@ public class AdminService implements IAdminService{
 		// TODO Auto-generated method stub
 		try {
 			List<Ticket_Table> ticketList = ticketRepository.FindTicketByProjectId(id);
-			if(ticketList.size() == 0) {
+			if (ticketList.size() == 0) {
 				return null;
 			} else {
 				return ticketList;
 			}
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
@@ -183,62 +170,73 @@ public class AdminService implements IAdminService{
 	@Override
 	public Ticket_Table assignTicketToEmployeeByAdmin(Long ticketId, Long employeeId) {
 		// TODO Auto-generated method stub
-		
+
 		try {
 			Optional<Ticket_Table> data = ticketRepository.findById(ticketId);
-			if(data.isPresent())
-			{
+			if (data.isPresent()) {
 				Ticket_Table ticket = data.get();
 				ticket.setAssignedToEmployee(employeeId);
 				return ticketRepository.save(ticket);
-			}
-			else {
+			} else {
 				return null;
 			}
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	public Ticket_Table getTicketById(Long id) {
-		// TODO Auto-generated method stub 
+		// TODO Auto-generated method stub
 		try {
 			Optional<Ticket_Table> data = ticketRepository.findById(id);
-			if(data.isPresent())
-			return data.get();
+			if (data.isPresent())
+				return data.get();
 			else {
 				return null;
 			}
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	public Ticket_Table updateTicketStatusById(Long id) {
-		// TODO Auto-generated method stub 
+		// TODO Auto-generated method stub
 		try {
 			Optional<Ticket_Table> data = ticketRepository.findById(id);
-			if(data.isPresent()) {
-			data.get().setStatusTable(null);
-			return data.get();
-			}
-			else {
+			if (data.isPresent()) {
+				data.get().setStatusTable(null);
+				return data.get();
+			} else {
 				return null;
 			}
-		}catch(Exception ex) {
+		} catch (Exception ex) {
 			System.out.println(ex);
 			return null;
 		}
-		
+
 	}
 
-	
-	 
-	
+	@Override
+	public Employee_Table registerEmployee(Employee_Table employee) {
+		try {
+			List<Employee_Table> EmployeeList = employeeRepository.findAll();
+			for (Employee_Table isExists : EmployeeList) {
+				if (isExists.getEmailId().equalsIgnoreCase(employee.getEmailId())) {
+					throw new EbugException("Employee already Exists");
+				}
+			}
+			employee.setRole("employee");
+			return employeeRepository.save(employee);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return null;
+		}
+	}
+
 }

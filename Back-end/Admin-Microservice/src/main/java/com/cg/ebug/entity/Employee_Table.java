@@ -4,18 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id; 
+import javax.persistence.Id;
 
 @Entity
 public class Employee_Table {
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private long empId;
 	@Column
-	private String firstName;
-	@Column
-	private String lastName;
+	private String userName;
 	@Column
 	private String emailId;
 	@Column
@@ -24,63 +22,101 @@ public class Employee_Table {
 	private String password;
 	@Column
 	private String role;
+	
+	
+	
 	public Employee_Table() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Employee_Table(long id, String firstName, String lastName, String emailId, long mobileNo, String password,
+
+
+
+	public Employee_Table(long empId, String userName, String emailId, long mobileNo, String password,
 			String role) {
 		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.empId = empId;
+		this.userName = userName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
 		this.password = password;
 		this.role = role;
 	}
-	public long getId() {
-		return id;
+
+
+
+	public long getEmpId() {
+		return empId;
 	}
-	public void setId(long id) {
-		this.id = id;
+
+
+
+	public void setEmpId(long empId) {
+		this.empId = empId;
 	}
-	public String getFirstName() {
-		return firstName;
+
+
+
+	public String getUserName() {
+		return userName;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+
+
+	public void setUserName(String firstName) {
+		this.userName = firstName;
 	}
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+
+
+
 	public String getEmailId() {
 		return emailId;
 	}
+
+
+
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
+
+
+
 	public long getMobileNo() {
 		return mobileNo;
 	}
+
+
+
 	public void setMobileNo(long mobileNo) {
 		this.mobileNo = mobileNo;
 	}
+
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+
 	public String getRole() {
 		return role;
 	}
+
+
+
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
+	
+	
 	
 	
 	

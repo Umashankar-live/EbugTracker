@@ -13,6 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
+import { RegisterEmployeeComponent } from './admin/register-employee/register-employee.component';
+import { AddProjectComponent } from './admin/add-project/add-project.component';
+
 
 
 
@@ -24,7 +27,10 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     LoginComponent,
     AdminDashBoardComponent,
-    UserDashBoardComponent
+    UserDashBoardComponent,
+    RegisterEmployeeComponent,
+    AddProjectComponent,
+    
     
   ],
   imports: [

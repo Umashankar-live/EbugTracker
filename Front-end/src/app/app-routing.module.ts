@@ -4,14 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminDashBoardComponent } from './admin-dash-board/admin-dash-board.component';
 import { LoginComponent } from './login/login.component';
 import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
-
+import { RegisterEmployeeComponent } from './admin/register-employee/register-employee.component';
+import { AddProjectComponent } from './admin/add-project/add-project.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent},
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
 
   {
-    path: 'admin/dashboard', component: AdminDashBoardComponent, children: [], canActivate: [AuthGuard]
+    path: 'admin/dashboard', component: AdminDashBoardComponent, children: [
+      { path: 'registerEmployee', component: RegisterEmployeeComponent },
+      { path: 'addProject', component: AddProjectComponent }
+    ], canActivate: [AuthGuard]
   },
 
   {
