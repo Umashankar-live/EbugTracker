@@ -18,11 +18,11 @@ html, body { height: 100%; }
 }
 
 thead{
-    background: darkslategrey;
+    background: rgb(47, 49, 79);
     color: whitesmoke;
 }
 
 .card-header{
-    background-color: darkslategrey;
+    background-color: rgb(47, 49, 79);
     color: whitesmoke;
 }
