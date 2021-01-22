@@ -96,21 +96,21 @@ export class LoginComponent implements OnInit {
             this.isLogginIn = false
           }
           else if (res.role == "admin") {
-            sessionStorage.setItem('custId', res.userId)
+            sessionStorage.setItem('custId', res.empId)
             sessionStorage.setItem('userType', window.btoa("admin"))
             this.Auth.setLoggedIn(true);
             this.router.navigate(['admin/dashboard'])
 
           }
           else if (res.role == "customer") {
-            sessionStorage.setItem('custId', res.userId)
+            sessionStorage.setItem('custId', res.empId)
             sessionStorage.setItem('uName', res.userName)
             sessionStorage.setItem('userType', window.btoa("customer"))
             this.Auth.setLoggedIn(true);
-            this.router.navigate(['user/dashboard'])
+            this.router.navigate(['customer/dashboard'])
           }
           else if (res.role == "employee") {
-            sessionStorage.setItem('empId', res.userId)
+            sessionStorage.setItem('empId', res.empId)
             sessionStorage.setItem('eName', res.userName)
             sessionStorage.setItem('userType', window.btoa("employee"))
             this.Auth.setLoggedIn(true);

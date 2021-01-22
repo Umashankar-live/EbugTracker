@@ -4,10 +4,10 @@ import { AuthService } from 'src/service/auth.service';
 
 @Component({
   selector: 'app-user-dash-board',
-  templateUrl: './user-dash-board.component.html',
-  styleUrls: ['./user-dash-board.component.css']
+  templateUrl: './customer-dash-board.component.html',
+  styleUrls: ['./customer-dash-board.component.css']
 })
-export class UserDashBoardComponent implements OnInit {
+export class CustomerDashBoardComponent implements OnInit {
 
   sidebarClass: string = ""
   menuToggleClass: string = "container1"
@@ -30,13 +30,18 @@ export class UserDashBoardComponent implements OnInit {
   ngOnInit(): void {
 
     this.name = sessionStorage.getItem('uName');
-    console.log("Name = " + this.name);
-
-    
+    console.log("Name = " + this.name); 
 
   }
 
-  
+
+  getPersonalDetail() {
+
+    this.userId = sessionStorage.getItem('custId')
+    console.log(this.userId);
+    this.router.navigate(['/customer/dashboard/PersonalDetails/', this.userId]);
+  }
+
 
 
   logOut() {

@@ -1,9 +1,9 @@
 export class Employee {
-    empId: number;
+    empId: string;
     userName: string;
     emailId: string;
     mobileNo: number;
     password: string;
-    role : string
+    role : string;
 
 }

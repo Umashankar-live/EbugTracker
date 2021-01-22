@@ -5,13 +5,13 @@
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav clickable"> <br>
         <li class="sidebar-brand ">
-          <a class="h2" routerLink="/user/dashboard">
+          <a class="h2" routerLink="/customer/dashboard">
             <i class="fas fa-hospital-user"></i> Customer
           </a>
           <hr>
         </li>
         <li
-          [ngStyle]='{"background": router.url == "/user/dashboard/userCenter/view" ? "rgba(255,255,255,0.2)" : "rgb(124, 57, 74)"}'
+          [ngStyle]='{"background": router.url == "/customer/dashboard/userCenter/view" ? "rgba(255,255,255,0.2)" : "rgb(124, 57, 74)"}'
           title="Available Center">
           <a (click)="checkAppointmentexist()"><i class="fas fa-file"></i>&nbsp; Raise Ticket</a>
         </li>
@@ -22,8 +22,8 @@
         </li>
         <hr>
         <li
-          [ngStyle]='{"background": router.url == "/user/dashboard/PersonalDetails/:userId" ? "rgba(255,255,255,0.2)" : "rgb(124, 57, 74)"}'
-          title="View all centers">
+          [ngStyle]='{"background": router.url == "/customer/dashboard/PersonalDetails/:userId" ? "rgba(255,255,255,0.2)" : "rgb(124, 57, 74)"}'
+          title="Edit personal details">
           <a (click)=getPersonalDetail()><i class="fas fa-user"></i>&nbsp; Personal Details</a>
         </li>
 
@@ -51,5 +51,5 @@
       <!-- /#page-content-wrapper -->
     </div>
   </div>
-<div *ngIf='router.url == "/user/dashboard"'>&nbsp;&nbsp;<h1 class="display-4" style="font-family: 'Times New Roman', Times, serif;">Welcome {{name}}... !!!</h1></div>
+<div *ngIf='router.url == "/customer/dashboard"'>&nbsp;&nbsp;<h1 class="display-4" style="font-family: 'Times New Roman', Times, serif;">Welcome {{name}}... !!!</h1></div>
 </div>

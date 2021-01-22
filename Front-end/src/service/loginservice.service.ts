@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Login } from 'src/models/login.model';
+import { Employee } from 'src/models/employee.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class LoginserviceService {
   constructor(private http: HttpClient) { }
 
   public loginUser(login: Login) {
-    return this.http.post<User>(this.login_url, login)
+    return this.http.post<Employee>(this.login_url, login)
   }
 
   public registerUser(user: User): Observable<any> {
@@ -30,11 +31,11 @@ export class LoginserviceService {
 
 
   public getUserByUserId(userId: string) {
-    return this.http.get<User>(this.getUser_url + userId);
+    return this.http.get<Employee>(this.getUser_url + userId);
   }
 
-  updateUser(user: User, userId: string) {
-    return this.http.put<User>("http://localhost:9002/EtrackingSystem/updateUser/"+userId, user);
+  updateUser(user: Employee, userId: string) {
+    return this.http.put<Employee>("http://localhost:9002/EtrackingSystem/user/updateUser/"+userId, user);
   }
 
 }

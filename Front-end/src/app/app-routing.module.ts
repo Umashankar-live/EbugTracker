@@ -3,10 +3,11 @@ import { AuthGuard } from './auth.guard';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminDashBoardComponent } from './admin-dash-board/admin-dash-board.component';
 import { LoginComponent } from './login/login.component';
-import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
+import { CustomerDashBoardComponent } from './customer-dash-board/customer-dash-board.component';
 import {EmployeeDashBoardComponent} from './employee-dash-board/employee-dash-board.component';
 import { RegisterEmployeeComponent } from './admin/register-employee/register-employee.component';
 import { AddProjectComponent } from './admin/add-project/add-project.component';
+import {PersonalDetailsComponent} from './customer/personal-details/personal-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,7 +21,11 @@ const routes: Routes = [
   },
 
   {
-    path: 'user/dashboard', component: UserDashBoardComponent, children: [], canActivate: [AuthGuard]
+    path: 'customer/dashboard', component: CustomerDashBoardComponent, children: [
+      
+      { path: 'PersonalDetails/:userId', component: PersonalDetailsComponent }
+
+    ], canActivate: [AuthGuard]
   },
 
   {

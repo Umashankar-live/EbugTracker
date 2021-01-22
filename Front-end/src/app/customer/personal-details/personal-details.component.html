@@ -1,0 +1,99 @@
+<div class="container">
+  <div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <div class="card bg-transparent">
+          <div class="card-header">
+            <p class="h1" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><i class="fas fa-user
+              "></i> Your Details</p>
+          </div>
+          <pre style="font-family: 'Times New Roman', Times, serif;">
+             <h4>    <b>User Name :</b> {{user.userName}} </h4>
+             <h4>    <b>Email Id  :</b> {{user.emailId}} </h4> 
+             <h4>    <b>Mobile No :</b> {{user.mobileNo}} </h4>
+             
+            <button data-toggle="modal" data-target="#updateModal" (click)='
+            userName = user.userName;
+            email = user.emailId;
+            mobile = user.mobileNo;
+            password = user.password;
+            '  type="button" class="btn btn-success"><i class="far fa-edit"></i> Update Details</button> 
+          </pre>
+
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="updateModalLabel"><i class="fa fa-edit"></i> Edit User
+          </h1>
+
+          <button (click)="reload()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        
+        <div class="alert alert-success" *ngIf='isUpdated'>
+          <button href="#" class="close" (click)='isUpdated = false'>&times;</button>
+          <small><strong>SUCCESS !</strong> Your Details Have Been Updated... !!</small>
+        </div>
+
+
+        <div class="modal-body">
+          <form #updateForm='ngForm' (submit)='onUpdate(updateForm)'>
+            <div class="card-body">
+              <div class="form-group">
+                <input type="text" placeholder="User Name" name="userNAme" class="form-control" [(ngModel)]='userName'
+                  #name="ngModel" pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" required>
+                <span *ngIf='!name.valid && name.touched'>
+                  <p class="errorText">Enter User Name.</p>
+                </span>
+              </div>
+              <div class="form-group">
+                <input type="text" placeholder="Email ID" name="email" class="form-control" [(ngModel)]='email'
+                  #emailId="ngModel" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" required>
+                <span *ngIf='!emailId.valid && emailId.touched'>
+                  <p class="errorText">Enter correct email Id.</p>
+                </span>
+              </div>
+              
+
+              <div class="form-group">
+                <input type="text" placeholder="Mobile No." name="mobile" class="form-control" [(ngModel)]='mobile'
+                  #Mobile="ngModel"  required>
+                <span *ngIf='!Mobile.valid && Mobile.touched'>
+                  <p class="errorText">Enter Mobile.</p>
+                </span>
+              </div>
+
+              <div class="form-group">
+                <input type="text" placeholder="Password " name="password" class="form-control" [(ngModel)]='password'
+                  #passWord="ngModel" required>
+                <span *ngIf='!passWord.valid && passWord.touched'>
+                  <p class="errorText">Enter Password</p>
+                </span>
+              </div>
+
+            </div>
+            <div class="card-footer">
+              <button type="submit" [disabled]='!updateForm.valid' class="btn btn-primary"><i class="fa fa-sync"
+                  aria-hidden="true"></i>
+                Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
