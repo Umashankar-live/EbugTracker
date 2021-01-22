@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-dash-board',
-  templateUrl: './user-dash-board.component.html',
-  styleUrls: ['./user-dash-board.component.css']
+  selector: 'app-employee-dash-board',
+  templateUrl: './employee-dash-board.component.html',
+  styleUrls: ['./employee-dash-board.component.css']
 })
-export class UserDashBoardComponent implements OnInit {
+export class EmployeeDashBoardComponent implements OnInit {
 
   sidebarClass: string = ""
   menuToggleClass: string = "container1"
@@ -22,21 +22,15 @@ export class UserDashBoardComponent implements OnInit {
  
 
 
+  constructor(private router: Router, private authService: AuthService) { }
 
-  constructor(private router: Router, private authService: AuthService) {
+  ngOnInit() {
 
-  }
-
-  ngOnInit(): void {
-
-    this.name = sessionStorage.getItem('uName');
+    this.name = sessionStorage.getItem('eName');
     console.log("Name = " + this.name);
 
     
-
   }
-
-  
 
 
   logOut() {
@@ -56,8 +50,5 @@ export class UserDashBoardComponent implements OnInit {
       this.menuToggleClass = "container1 clickable"
     }
   }
-
-
- 
 
 }

@@ -113,7 +113,7 @@
                                 <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                             </div>
                             <input type="email" class="form-control" placeholder="Enter Your Email-Id" name="email"
-                                [(ngModel)]="user.email" required
+                                [(ngModel)]="user.emailId" required
                                 pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" #email="ngModel"
                                 [class.is-invalid]="email.invalid && email.touched">
                             <div *ngIf="email.errors && (email.invalid && email.touched)">

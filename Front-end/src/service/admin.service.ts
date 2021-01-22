@@ -10,6 +10,7 @@ import { Project } from 'src/models/project.model';
 
 export class AdminService {
 
+
   constructor(private http: HttpClient) {
 
   }
@@ -23,9 +24,20 @@ export class AdminService {
     return this.http.post<any>("http://localhost:9090/admin/createproject", project);
   }
 
+  countPending() {
+    return this.http.get("http://localhost:9090/admin/countPending");
+  }
+
+
+  countProject() {
+    return this.http.get("http://localhost:9090/admin/countProject");
+
+  }
+
+  countEmployee() {
+    return this.http.get("http://localhost:9090/admin/countEmployee");
+
+  }
+
 
 }
-
-
-
-

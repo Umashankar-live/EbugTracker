@@ -9,30 +9,30 @@
                     </a>
                     <hr>
                 </li>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/registerEmployee" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79"}'
-                    title="Register new employee">
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/registerEmployee" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="Register new Employee">
                     <a routerLink='/admin/dashboard/registerEmployee'><i class="fa fa-plus"></i> Register Employee</a>
                 </li>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/test/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79"}'
-                    title="View all Tests">
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/test/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="Send soulution to customer">
                     <a routerLink='/admin/dashboard/test/view'><i class="fa fa-table"></i> Send Solution</a>
                 </li>
                 <hr>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/addProject" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79"}'
-                    title="Add new project ">
-                    <a routerLink='addProject'><i class="fa fa-plus"></i> Add Project</a>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/addProject" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="Add new project">
+                    <a routerLink='/admin/dashboard/addProject'><i class="fa fa-plus"></i> Add Project</a>
                 </li>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/center/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79"}'
-                    title="View all centers">
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/center/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="View all bugs raised">
                     <a routerLink='center/view'><i class="fa fa-table"></i> View All Bug</a>
                 </li>
                 <hr>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79"}'
-                    title="View all Appointments">
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="assign bug to employee">
                     <a routerLink='appointments/view'><i class="fa fa-table"></i> Assign Bug</a>
                 </li>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/pending" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79"}'
-                    title="View Pending Details">
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/pending" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="View Pending request">
                     <a routerLink='/admin/dashboard/appointments/pending'><i class="fas fa-hourglass-start"></i> Pending
                         Requests</a>
                 </li>
@@ -66,12 +66,12 @@
                             <div class="row">
                                 <div class="col-md-4 card-header" style="background-color: rgb(47, 49, 79);">
                                     <h1 style="color: whitesmoke;">
-                                        {{ testCount }}
+                                        {{ employeeCount }}
                                         <div *ngIf='isLoadingCount' class="spinner spinner-grow"></div>
                                     </h1>
                                 </div>
                                 <div class="col-md-8 card-body">
-                                    <p class="h4">Total No. of Projects</p>
+                                    <p class="h4">Total No. of Employees</p>
                                 </div>
                             </div>
                         </div>
@@ -80,12 +80,12 @@
                             <div class="row">
                                 <div class="col-md-4 card-header" style="background-color:rgb(47, 49, 79);">
                                     <h1 style="color: whitesmoke;">
-                                        {{centerCount}}
-                                        <div *ngIf='isLoadingCenters' class="spinner spinner-grow"></div>
+                                        {{projectCount}}
+                                        <div *ngIf='isLoadingProject' class="spinner spinner-grow"></div>
                                     </h1>
                                 </div>
                                 <div class="col-md-8 card-body">
-                                    <p class="h4"> Total No. of Employees </p>
+                                    <p class="h4"> Total No. of Projects </p>
                                 </div>
                             </div>
                         </div>

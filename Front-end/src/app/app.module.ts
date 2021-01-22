@@ -15,6 +15,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { RegisterEmployeeComponent } from './admin/register-employee/register-employee.component';
 import { AddProjectComponent } from './admin/add-project/add-project.component';
+import { EmployeeDashBoardComponent } from './employee-dash-board/employee-dash-board.component';
 
 
 
@@ -30,6 +31,7 @@ import { AddProjectComponent } from './admin/add-project/add-project.component';
     UserDashBoardComponent,
     RegisterEmployeeComponent,
     AddProjectComponent,
+    EmployeeDashBoardComponent,
     
     
   ],

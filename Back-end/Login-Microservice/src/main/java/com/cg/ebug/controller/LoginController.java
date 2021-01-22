@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.ebug.entity.Login;
-import com.cg.ebug.entity.User;
+import com.cg.ebug.entity.Employee_Table;
 import com.cg.ebug.service.LoginService;
 import com.cg.ebug.service.UserServiceInterface;
 
@@ -39,10 +39,10 @@ public class LoginController {
 	private UserServiceInterface userService ;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public User loginUser(@RequestBody Login user) {
+	public Employee_Table loginUser(@RequestBody Login user) {
 		String tempUsername = user.getUserName();
 		String tempPassword = user.getPassword();
-		User userObj ;
+		Employee_Table userObj ;
 		if (tempUsername != null && tempPassword != null) {
 			userObj = service.getUserByUserNameAndPassword(tempUsername, tempPassword);
 			return userObj ;
@@ -54,7 +54,7 @@ public class LoginController {
 	
 	    //http://localhost:9002/user/addUser
 		@RequestMapping(value = "user/addUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public User addUser(  @RequestBody User user) {
+		public Employee_Table addUser(  @RequestBody Employee_Table user) {
 			user.setRole("customer");
 			return this.userService.addUser(user);
 		}
@@ -62,30 +62,30 @@ public class LoginController {
 
 		//http://localhost:9002/user/getAllUser
 		@GetMapping(value = "user/getAllUser")
-		public List<User> getAllTest() {
+		public List<Employee_Table> getAllTest() {
 			return this.userService.getAllUser();
 		}
 
 		//http://localhost:9002/user/deleteUser/12
 		@DeleteMapping(value = "user/deleteUser/{userId}")
-		public void deleteUser(@PathVariable Integer userId) {
+		public void deleteUser(@PathVariable Long userId) {
 			this.userService.deleteUser(userId);
 		}
 
 		//http://localhost:9002/user/searchUser/1
 		@GetMapping(value = "user/searchUser/{userId}")
-		public User searchUserById(@PathVariable Integer userId) {
+		public Employee_Table searchUserById(@PathVariable Long userId) {
 			return this.userService.searchUser(userId);
 		}
 		
 		//http://localhost:9002/user/updateUser/1
 		@RequestMapping(value = "user/updateUser/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public User updateUser(@RequestBody User user,@PathVariable Integer userId) {
-			User newUser = this.userService.searchUser(userId);
+		public Employee_Table updateUser(@RequestBody Employee_Table user,@PathVariable Long userId) {
+			Employee_Table newUser = this.userService.searchUser(userId);
 			newUser.setUserName(user.getUserName());
 			newUser.setPassword(user.getPassword());
 			newUser.setMobileNo(user.getMobileNo());
-			newUser.setEmail(user.getEmail());	
+			newUser.setEmailId(user.getEmailId());	
 			newUser.setRole("customer");
 			return this.userService.updateUser(newUser);
 			

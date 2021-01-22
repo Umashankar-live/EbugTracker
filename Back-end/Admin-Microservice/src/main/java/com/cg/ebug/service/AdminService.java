@@ -239,4 +239,16 @@ public class AdminService implements IAdminService {
 		}
 	}
 
+	@Override
+	public long countProject() {
+		
+		return this.projectRepository.count();
+	}
+
+	@Override
+	public long countEmployee() {
+		
+		return this.employeeRepository.countEmployee();
+	}
+
 }

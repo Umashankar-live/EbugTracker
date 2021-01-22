@@ -3,31 +3,31 @@ package com.cg.ebug.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.ebug.entity.User;
-import com.cg.ebug.dao.UserDao;
+import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.dao.EmployeeDao;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
 	// The process of injection spring bean dependencies while initializing it
 	@Autowired
-	private UserDao userDao;
+	private EmployeeDao userDao;
 
 
 	@Override
-	public User getUserByUserName(String userName) {
+	public Employee_Table getUserByUserName(String userName) {
 		return userDao.findByUserName(userName);
 		 
 	}
 
 	@Override
-	public User addUser(User user) {
-		user.setRole("user");
+	public Employee_Table addUser(Employee_Table user) {
+		user.setRole("customer");
 		return userDao.save(user);
 	}
 
 	@Override
-	public User getUserByUserNameAndPassword(String tempUsername, String tempPassword) {
+	public Employee_Table getUserByUserNameAndPassword(String tempUsername, String tempPassword) {
 		return userDao.findByUserNameAndPassword(tempUsername,tempPassword);
 	}
 

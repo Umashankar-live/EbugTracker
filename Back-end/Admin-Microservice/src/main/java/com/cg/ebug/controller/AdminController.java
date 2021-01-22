@@ -109,4 +109,23 @@ public class AdminController {
 	}
 	
 	
+	// count of field
+	
+	
+    @GetMapping(value = "/countProject")
+	public long countProject() {
+	  return adminService.countProject();
+		
+    }
+    
+    @GetMapping(value = "/countEmployee")
+	public long countEmployee() {
+	  return adminService.countEmployee();
+		
+    }
+    
+    
+    
+	
+	
 }

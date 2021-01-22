@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/service/auth.service';
+import {AdminService} from 'src/service/admin.service' ;
 
 @Component({
   selector: 'app-admin-dash-board',
@@ -11,18 +12,39 @@ export class AdminDashBoardComponent implements OnInit {
 
   sidebarClass: string = ""
   menuToggleClass: string = "container1"
-  testCount: object = null
-  centerCount: object = null
+  employeeCount: object = null
+  projectCount: object = null
   pendingCount: object = null
 
   isLoadingCount: boolean = true
   isLoadingPending: boolean = true
-  isLoadingCenters: boolean = true
+  isLoadingProject: boolean = true
 
 
-  constructor(private router: Router,  private authService: AuthService) { }
+  constructor(private router: Router,  private authService: AuthService, private adminService : AdminService) { }
 
   ngOnInit(): void {
+
+    this.adminService.countEmployee().subscribe(
+      res => {
+        this.employeeCount = res
+        this.isLoadingCount = false
+      }
+    )
+
+    this.adminService.countProject().subscribe(
+      res => {
+        this.projectCount = res
+        this.isLoadingProject = false
+      }
+    )
+
+    this.adminService.countPending().subscribe(
+      res => {
+        this.pendingCount = res
+        this.isLoadingPending = false
+      }
+    )
     
 
   }

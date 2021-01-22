@@ -1,0 +1,55 @@
+<div id="wrapper" class={{sidebarClass}} style="overflow-x: hidden;">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav clickable"> <br>
+        <li class="sidebar-brand ">
+          <a class="h2" routerLink="/employee/dashboard">
+            <i class="fas fa-user-circle"></i> Employee
+          </a>
+          <hr>
+        </li>
+        <li
+          [ngStyle]='{"background": router.url == "/user/dashboard/userCenter/view" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+          title="view assigned bug">
+          <a (click)="checkAppointmentexist()"><i class="fas fa-mail-bulk"></i>&nbsp; Assigned Bug</a>
+        </li>
+        <li
+          [ngStyle]='{"background": router.url == "/user/dashboard/viewStatus/:appointmentId" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+          title="Send solution">
+          <a (click)="viewStatus()"><i class="fas fa-book-reader"></i>&nbsp; Send Solution</a>
+        </li>
+        <hr>
+        <li
+          [ngStyle]='{"background": router.url == "/user/dashboard/PersonalDetails/:userId" ? "rgba(255,255,255,0.2)" : "darkslategrey"}'
+          title="Assign bug">
+          <a (click)=getPersonalDetail()><i class="fas fa-user"></i>&nbsp; Assign Bug</a>
+        </li>
+
+        <hr>
+        <li class="container" title="Log out">
+          <button class="btn btn-transparent float-right" (click)='logOut()' style="color: #999999;"><i
+              class="fa fa-power-off"></i>
+            Logout</button>
+        </li>
+      </ul>
+
+      <!-- /#sidebar-wrapper -->
+    </div>
+    <div class="col-md-12">
+      <!-- Page Content -->
+      &nbsp;&nbsp; <div class={{menuToggleClass}} (click)='toggleClass()'>
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+  </div>
+<div *ngIf='router.url == "/employee/dashboard"'>&nbsp;&nbsp;<h1 class="display-4" style="font-family: 'Times New Roman', Times, serif;">Welcome {{name}}... !!!</h1></div>
+</div>

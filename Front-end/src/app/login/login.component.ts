@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
 
       login.userName = this.userName
       login.password = this.password
+      console.log(login)
       this.loginservice.loginUser(login).subscribe(
         res => {console.log(res);
           
@@ -104,9 +105,16 @@ export class LoginComponent implements OnInit {
           else if (res.role == "customer") {
             sessionStorage.setItem('custId', res.userId)
             sessionStorage.setItem('uName', res.userName)
-            sessionStorage.setItem('userType', window.btoa("user"))
+            sessionStorage.setItem('userType', window.btoa("customer"))
             this.Auth.setLoggedIn(true);
             this.router.navigate(['user/dashboard'])
+          }
+          else if (res.role == "employee") {
+            sessionStorage.setItem('empId', res.userId)
+            sessionStorage.setItem('eName', res.userName)
+            sessionStorage.setItem('userType', window.btoa("employee"))
+            this.Auth.setLoggedIn(true);
+            this.router.navigate(['employee/dashboard'])
           }
         }
       )
