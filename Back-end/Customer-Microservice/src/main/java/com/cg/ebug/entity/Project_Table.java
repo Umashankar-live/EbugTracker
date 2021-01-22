@@ -8,8 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Project_Table {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
 private Long id;
 
 private String projectName;

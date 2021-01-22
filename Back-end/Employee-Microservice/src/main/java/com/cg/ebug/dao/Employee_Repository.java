@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.cg.ebug.entity.Employee_Table;
 
-public interface Employee_Repositroy  extends JpaRepository<Employee_Table, Long> {
+public interface Employee_Repository  extends JpaRepository<Employee_Table, Long> {
 
 	@Query(value = "select e from Employee_Table e where e.emailId=:emailId and e.password=:password" )
 	Employee_Table login(String emailId,String password);
