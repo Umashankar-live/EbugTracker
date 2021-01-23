@@ -22,7 +22,7 @@
         </li>
         <hr>
         <li
-          [ngStyle]='{"background": router.url == "/customer/dashboard/PersonalDetails/:userId" ? "rgba(255,255,255,0.2)" : "rgb(124, 57, 74)"}'
+          [ngStyle]='{"background": router.url == "/customer/dashboard/PersonalDetails/" ? "rgba(255,255,255,0.2)" : "rgb(124, 57, 74)"}'
           title="Edit personal details">
           <a (click)=getPersonalDetail()><i class="fas fa-user"></i>&nbsp; Personal Details</a>
         </li>
