@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Employee } from 'src/models/employee.model';
 import { HttpClient } from '@angular/common/http';
 import { Project } from 'src/models/project.model';
+import { Ticket } from 'src/models/ticket.model';
 
 
 @Injectable({
@@ -9,6 +10,7 @@ import { Project } from 'src/models/project.model';
 })
 
 export class AdminService {
+ 
 
 
   constructor(private http: HttpClient) {
@@ -38,6 +40,28 @@ export class AdminService {
     return this.http.get("http://localhost:9090/admin/countEmployee");
 
   }
+
+  fetchAllTicket() {
+    return this.http.get<Ticket[]>("http://localhost:9090/admin/tickets")
+  }
+
+  updateTicket(raisedTicket: Ticket, ticketId: number) {
+    return this.http.put<Ticket>("http://localhost:9090/admin/updateticket/"+ticketId, raisedTicket);
+  }
+
+  assignTicket(empId: number, ticketId: number) {
+
+     return this.http.get<Ticket>("http://localhost:9090/admin/assignticket/"+ticketId+"/"+empId);
+   
+  }
+
+  fetchAllTicketForUpdate() {
+    return this.http.get<Ticket[]>("http://localhost:9090/admin/updateticketList")
+  }
+  
+  
+  
+  
 
 
 }

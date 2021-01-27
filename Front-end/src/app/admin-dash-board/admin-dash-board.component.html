@@ -18,18 +18,18 @@
                     title="Add new project">
                     <a routerLink='/admin/dashboard/addProject'><i class="fa fa-plus"></i> Add Project</a>
                 </li>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/center/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
-                    title="View all bugs raised">
-                    <a routerLink='center/view'><i class="fa fa-table"></i> View All Bug</a>
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/updateTicket" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                    title="Update all bugs raised">
+                    <a routerLink='updateTicket'><i class="fa fa-table"></i> Update Ticket</a>
                 </li>
                 <hr>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/view" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/assignTicket" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
                     title="assign bug to employee">
-                    <a routerLink='appointments/view'><i class="fa fa-table"></i> Assign Bug</a>
+                    <a routerLink='assignTicket'><i class="fa fa-table"></i> Assign Bug</a>
                 </li>
-                <li [ngStyle]='{"background": router.url == "/admin/dashboard/appointments/pending" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
+                <li [ngStyle]='{"background": router.url == "/admin/dashboard/pending" ? "rgba(255,255,255,0.2)" : "rgb(47, 49, 79)"}'
                     title="View Pending request">
-                    <a routerLink='/admin/dashboard/appointments/pending'><i class="fas fa-hourglass-start"></i> Pending
+                    <a routerLink='/admin/dashboard/pendingRequest'><i class="fas fa-hourglass-start"></i> Pending
                         Requests</a>
                 </li>
                 <hr>

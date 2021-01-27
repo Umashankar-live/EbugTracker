@@ -62,7 +62,7 @@ public class LoginController {
 
 		//http://localhost:9002/user/getAllUser
 		@GetMapping(value = "user/getAllUser")
-		public List<Employee_Table> getAllTest() {
+		public List<Employee_Table> getAllEmployee() {
 			return this.userService.getAllUser();
 		}
 

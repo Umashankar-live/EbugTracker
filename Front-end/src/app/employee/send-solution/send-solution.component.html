@@ -1,0 +1,140 @@
+ <div class="bg-image">
+  <div>
+      <div class="container" style="overflow-x: auto;">
+          <h1 class="text-center"><i class="fas fa-ticket-alt"></i>&nbsp;Raised Ticket List</h1>
+          <div class="input-group mb-3 float-left col-md-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                      <i class="fa fa-search"></i>
+                  </span>
+              </div>
+              <input (keyup)='onKeyUpAll($event)' class="form-control" placeholder="Search By Title..." />
+          </div>
+          <div ngbDropdown class="float-right">
+              <button style="font-variant:small-caps;font-style:normal;color:antiquewhite;font-size:18px;" class="btn"
+                  id="dropdownBasic1" ngbDropdownToggle>View By Status</button>
+              <br>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button class="dropdown-item" (click)='ticket = tempTicket'>All</button>
+                  <button class="dropdown-item" (click)='viewPending()'>Pending</button>
+                  <button class="dropdown-item" (click)='viewProcessing()'>Processing</button>
+                  <button class="dropdown-item" (click)='viewIntiated()'>Intiated</button>
+              </div>
+          </div>
+
+          <div ngbDropdown class="float-right">
+              <button style="font-variant:small-caps;font-style:normal;color:antiquewhite;font-size:18px;" class="btn"
+                  id="dropdownBasic1" ngbDropdownToggle>View By Critical Level</button>
+              <br>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button class="dropdown-item" (click)='ticket = tempTicket'>All</button>
+                  <button class="dropdown-item" (click)='viewLow()'>Low</button>
+                  <button class="dropdown-item" (click)='viewNormal()'>Normal</button>
+                  <button class="dropdown-item" (click)='viewHigh()'>High</button>
+              </div>
+          </div>
+          <table class="table table-striped table-bordered " style="color:black;font-weight:bold;font-size:18px;">
+              <caption *ngIf='!isLoaded'>
+                  <div class="spinner spinner-border"></div> Loading...
+              </caption>
+              <thead style="color: aliceblue;font-size:18px;" class="clickable">
+                  <td>Ticket ID</td>
+                  <th>Customer ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Solution</th>
+                  <th data-visible="false" style="display:none;">File Name</th>
+                  <th data-visible="false" style="display:none;">File type</th>
+                  <th colspan=3>Image</th>
+                  <th>Status</th>
+                  <th>Critical level</th>
+                  <th data-visible="false" style="display:none;">Is resolved</th>
+                  <th data-visible="false" style="display:none;">Employee ID</th>
+                  <th data-visible="false" style="display:none;">Employee Name</th>
+                  <th data-visible="false" style="display:none;">Is Assigned</th>
+                  <th data-visible="false" style="display:none;">Project Name</th>
+                  <th>Update Ticket</th>
+
+
+              </thead>
+              <tbody>
+                  <tr *ngFor='let t of ticket| paginate: { itemsPerPage: bucketSize, currentPage: page}'>
+                      <td>{{t.id}}</td>
+                      <td>{{t.custId}}</td>
+                      <td>{{t.title}}</td>
+                      <td>{{t.description}}</td>
+                      <td>{{t.solution}}</td>
+                      <td style="display:none;">{{t.name}}</td>
+                      <td style="display:none;">{{t.type}}</td>
+                      <td colspan=3><img src="data:image/jpeg;base64,{{t.picByte}}" width="200px" height="200px"></td>
+                      <td>{{t.status}}</td>
+                      <td>{{t.criticalLevel}}</td>
+                      <td style="display:none;">{{t.isResolved}}</td>
+                      <td style="display:none;">{{t.assignedToEmployee}}</td>
+                      <td style="display:none;">{{t.employeeName}}</td>
+                      <td style="display:none;">{{t.isAssigned}}</td>
+                      <td style="display:none;">{{t.projectName}}</td>
+                      <td><button data-toggle="modal" data-target="#updateModal" (click)='
+                        sendSolution = t.solution ;
+                        ticketId = t.id ;
+                        ' type="button" class="btn btn-success"><i class="far fa-edit"></i> Send Solution </button>
+                    </td>
+
+
+                  </tr>
+              </tbody>
+          </table>
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title" id="updateModalLabel"><i class="fa fa-edit"></i> Send Solution
+                  </h1>
+
+                  <button (click)="reload()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+
+
+              <div class="alert alert-success" *ngIf='isUpdated'>
+                  <button href="#" class="close" (click)='isUpdated = false'>&times;</button>
+                  <small><strong>SUCCESS !</strong> Ticket Have Been Updated... !!</small>
+              </div>
+
+
+              <div class="modal-body">
+                  <form #updateForm='ngForm' (submit)='onUpdate(updateForm)'>
+                      <div class="card-body">
+
+                          <div class="form-group">
+                              <input type="text" placeholder="Enter Solution" name="currentSolution"
+                                  class="form-control" [(ngModel)]='sendSolution' #solution="ngModel"
+                                   required>
+                              <span *ngIf='!solution.valid && solution.touched'>
+                                  <p class="errorText">Enter Solution.</p>
+                              </span>
+                          </div>
+
+
+                          <div class="card-footer">
+                              <button type="submit" [disabled]='!updateForm.valid' class="btn btn-primary"><i
+                                      class="fa fa-sync" aria-hidden="true"></i>
+                                   Solution</button>
+
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  </div>
+ 

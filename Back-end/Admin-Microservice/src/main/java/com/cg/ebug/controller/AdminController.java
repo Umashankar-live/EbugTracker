@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.ebug.entity.CriticalLevel_Table;
-//import com.cg.ebug.entity.Customer_Table;
+
 import com.cg.ebug.entity.Employee_Table;
 import com.cg.ebug.entity.Project_Table;
-import com.cg.ebug.entity.Status_Table;
 import com.cg.ebug.entity.Ticket_Table;
 import com.cg.ebug.exception.UserAlreadyRegisterd;
 import com.cg.ebug.service.IAdminService;
@@ -40,6 +39,11 @@ public class AdminController {
 		 return new ResponseEntity<Employee_Table>(response, HttpStatus.OK);
 	}
 	
+	@GetMapping("/updateticketList")
+	ResponseEntity<List<Ticket_Table>> getAllTicketForUpdate() {
+	    return new ResponseEntity<List<Ticket_Table>>(adminService.updateticketList(), HttpStatus.OK);
+	}
+	
 	@GetMapping("/tickets")
 	ResponseEntity<List<Ticket_Table>> getAllTickets() {
 	    return new ResponseEntity<List<Ticket_Table>>(adminService.getAllTickets(), HttpStatus.OK);
@@ -50,47 +54,28 @@ public class AdminController {
 	    return new ResponseEntity<Ticket_Table>(adminService.getTicketById(id), HttpStatus.OK);
 	}
 	
-	@GetMapping("/ticketbystatusid/{id}")
-	ResponseEntity<List<Ticket_Table>> getTicketsByStatusId(@PathVariable("id") Long id) {
-	    return new ResponseEntity<List<Ticket_Table>>(adminService.getTicketByStatusId(id), HttpStatus.OK);
-	}
-	
-	@GetMapping("/ticketbycriticalid/{id}")
-	ResponseEntity<List<Ticket_Table>> getTicketsByCriticalId(@PathVariable("id") Long id) {
-	    return new ResponseEntity<List<Ticket_Table>>(adminService.getTicketByCriticalLevelId(id), HttpStatus.OK);
-	}
-	
-	@GetMapping("/ticketbyprojectid/{id}")
-	ResponseEntity<List<Ticket_Table>> getTicketsByProjectId(@PathVariable("id") Long id) {
-	    return new ResponseEntity<List<Ticket_Table>>(adminService.getTicketByProjectId(id), HttpStatus.OK);
-	}
-	
-	@GetMapping("/getstatus")
-	ResponseEntity<List<Status_Table>> getAllStatus() {
-	    return new ResponseEntity<List<Status_Table>>(adminService.getAllStatus(), HttpStatus.OK);
-	}
 	
 	
-	@PostMapping("/updateticket")
-	ResponseEntity<Ticket_Table> updateTicketsByAdmin(@RequestBody Ticket_Table ticket) {
+	@PutMapping("/updateticket/{ticketId}")
+	ResponseEntity<Ticket_Table> updateTicketsByAdmin(@RequestBody Ticket_Table ticket,@PathVariable("ticketId") Long ticketId) {
+		Ticket_Table newTicket = this.adminService.getTicketById(ticketId);
+		System.out.println(newTicket);
+		newTicket.setCriticalLevel(ticket.getCriticalLevel());
+		newTicket.setStatus(ticket.getStatus());
+		newTicket.setProjectName(ticket.getProjectName());
 
-	    return new ResponseEntity<Ticket_Table>(adminService.updateTicketByAdmin(ticket), HttpStatus.OK);
+	    return new ResponseEntity<Ticket_Table>(adminService.updateTicketByAdmin(newTicket), HttpStatus.OK);
 	}
 	
-	@PostMapping("/assignticket/{ticketID}")
-	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @RequestBody Long employeeId) {
-	    System.out.println(ticketId);
-	    System.out.println(employeeId);
-	    
-//		return null;
-		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(ticketId, employeeId), HttpStatus.OK);
+	@GetMapping("/assignticket/{ticketID}/{empID}")
+	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @PathVariable("empID") Long empId) {
+		Ticket_Table newTicket = this.adminService.getTicketById(ticketId);
+		System.out.println(newTicket);
+		newTicket.setAssignedToEmployee(empId);
+		newTicket.setIsAssigned(true);
+		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(newTicket), HttpStatus.OK);
 	}
 	
-	
-	@GetMapping("/getcritical")
-	ResponseEntity<List<CriticalLevel_Table>> getAllCritical() {
-	    return new ResponseEntity<List<CriticalLevel_Table>>(adminService.getAllCritical(), HttpStatus.OK);
-	}
 	
 	// Project
 	@PostMapping("/createproject")
@@ -115,6 +100,12 @@ public class AdminController {
     @GetMapping(value = "/countProject")
 	public long countProject() {
 	  return adminService.countProject();
+		
+    }
+    
+    @GetMapping(value = "/countPending")
+	public long countPending() {
+	  return adminService.countPending();
 		
     }
     

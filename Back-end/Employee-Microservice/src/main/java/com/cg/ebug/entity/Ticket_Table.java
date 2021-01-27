@@ -5,13 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-
 @Entity
+@Table(name = "ticket_table")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Ticket_Table {
 	
@@ -19,42 +18,50 @@ public class Ticket_Table {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column
+	private long custId;
+	
 	private String title;
 	
-	private String comments;
+	private String description;
 	
 	private String solution;
 	
-	private String fileName;
+	private String name;
+
+	private String type;
+
+	@Column(name = "picByte", length = 65536, updatable = false)
+	private byte[] picByte;
 	
-	private Boolean isUpdatedByAdmin;
+	private String status;
 	
-	private Boolean isVerifiedByAdmin;
+	private String criticalLevel;
 	
 	private Boolean isResolved;
 	
-	private Long assignedToEmployee;
+	private long assignedToEmployee;
 	
-	@Column
-	private long custId;
+	private String employeeName;
+	
+	private Boolean isAssigned; 
+	
+	private String projectName;
 
-	//Bidirectional MApping, here fk is generate with status_id field
-	 @ManyToOne //(fetch = FetchType.LAZY)
-     @JoinColumn(name = "status_id")
-//	 @JsonBackReference(value="statusTable")
-	 private Status_Table statusTable;
-	 
-	// Bidirectional Mapping, here fk is generate with critical_id field
-	 @ManyToOne
-   @JoinColumn(name = "critical_id")
-//	 @JsonBackReference(value="criticalLevel")
-	 private CriticalLevel_Table criticalLevel;
-	 
-	 @ManyToOne
-	 @JoinColumn(name = "project_id")
-//	 @JsonBackReference(value="projectTable")
-	 private Project_Table projectTable;
-	 
+	public Ticket_Table() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Ticket_Table(long custId, String title, String description, String name, String type, byte[] picByte) {
+		super();
+		this.custId = custId;
+		this.title = title;
+		this.description = description;
+		this.name = name;
+		this.type = type;
+		this.picByte = picByte;
+	}
 
 	public Long getId() {
 		return id;
@@ -62,62 +69,6 @@ public class Ticket_Table {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getComments() {
-		return comments;
-	}
-
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-	public String getSolution() {
-		return solution;
-	}
-
-	public void setSolution(String solution) {
-		this.solution = solution;
-	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public Boolean getIsUpdatedByAdmin() {
-		return isUpdatedByAdmin;
-	}
-
-	public void setIsUpdatedByAdmin(Boolean isUpdatedByAdmin) {
-		this.isUpdatedByAdmin = isUpdatedByAdmin;
-	}
-
-	public Boolean getIsVerifiedByAdmin() {
-		return isVerifiedByAdmin;
-	}
-
-	public void setIsVerifiedByAdmin(Boolean isVerifiedByAdmin) {
-		this.isVerifiedByAdmin = isVerifiedByAdmin;
-	}
-
-	public Boolean getIsResolved() {
-		return isResolved;
-	}
-
-	public void setIsResolved(Boolean isResolved) {
-		this.isResolved = isResolved;
 	}
 
 	public long getCustId() {
@@ -128,68 +79,109 @@ public class Ticket_Table {
 		this.custId = custId;
 	}
 
-	public Status_Table getStatusTable() {
-		return statusTable;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setStatusTable(Status_Table statusTable) {
-		this.statusTable = statusTable;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public CriticalLevel_Table getCriticalLevel() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getSolution() {
+		return solution;
+	}
+
+	public void setSolution(String solution) {
+		this.solution = solution;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public byte[] getPicByte() {
+		return picByte;
+	}
+
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCriticalLevel() {
 		return criticalLevel;
 	}
 
-	public void setCriticalLevel(CriticalLevel_Table criticalLevel) {
+	public void setCriticalLevel(String criticalLevel) {
 		this.criticalLevel = criticalLevel;
 	}
 
-	public Project_Table getProjectTable() {
-		return projectTable;
+	public Boolean getIsResolved() {
+		return isResolved;
 	}
 
-	public void setProjectTable(Project_Table projectTable) {
-		this.projectTable = projectTable;
+	public void setIsResolved(Boolean isResolved) {
+		this.isResolved = isResolved;
 	}
 
-	public Ticket_Table() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Long getAssignedToEmployee() {
+	public long getAssignedToEmployee() {
 		return assignedToEmployee;
 	}
 
-	public void setAssignedToEmployee(Long assignedToEmployee) {
+	public void setAssignedToEmployee(long assignedToEmployee) {
 		this.assignedToEmployee = assignedToEmployee;
 	}
 
-	public Ticket_Table(Long id, String title, String comments, String solution, String fileName,
-			Boolean isUpdatedByAdmin, Boolean isVerifiedByAdmin, Boolean isResolved, Long assignedToEmployee,
-			long custId, Status_Table statusTable, CriticalLevel_Table criticalLevel, Project_Table projectTable) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.comments = comments;
-		this.solution = solution;
-		this.fileName = fileName;
-		this.isUpdatedByAdmin = isUpdatedByAdmin;
-		this.isVerifiedByAdmin = isVerifiedByAdmin;
-		this.isResolved = isResolved;
-		this.assignedToEmployee = assignedToEmployee;
-		this.custId = custId;
-		this.statusTable = statusTable;
-		this.criticalLevel = criticalLevel;
-		this.projectTable = projectTable;
+	public String getProjectName() {
+		return projectName;
 	}
 
-	
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public Boolean getIsAssigned() {
+		return isAssigned;
+	}
+
+	public void setIsAssigned(Boolean isAssigned) {
+		this.isAssigned = isAssigned;
+	}
 	
 
-
-	
-	 
-	 
-	 	
 }

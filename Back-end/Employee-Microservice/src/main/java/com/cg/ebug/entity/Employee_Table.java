@@ -8,12 +8,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Employee_Table {
+	
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long empId;
 	@Column
 	private String userName;
+	
+	@Column
+	private String projectName;
+	
 	@Column
 	private String emailId;
 	@Column
@@ -31,11 +36,12 @@ public class Employee_Table {
 
 
 
-	public Employee_Table(long empId, String userName, String emailId, long mobileNo, String password,
-			String role) {
+	public Employee_Table(long empId, String userName, String projectName, String emailId, long mobileNo,
+			String password, String role) {
 		super();
 		this.empId = empId;
 		this.userName = userName;
+		this.projectName = projectName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
 		this.password = password;
@@ -62,8 +68,20 @@ public class Employee_Table {
 
 
 
-	public void setUserName(String firstName) {
-		this.userName = firstName;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 
 
@@ -113,7 +131,9 @@ public class Employee_Table {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
+
+
 	
 	
 	

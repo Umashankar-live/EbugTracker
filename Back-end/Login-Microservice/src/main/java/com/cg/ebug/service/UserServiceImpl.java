@@ -1,6 +1,7 @@
 package com.cg.ebug.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,11 +73,13 @@ public class UserServiceImpl implements UserServiceInterface {
 	 */
 	@Override
 	public List<Employee_Table> getAllUser() {
-		if(this.userDao.findAll() == null) {
+		if(this.userDao.getEmployeeList() == null) {
 			 logger.warn("Check if database is empty or not");
 			 throw new NoValueFoundException("There is no user in Table...");
 		}
-		return this.userDao.findAll();
+		
+		
+		return this.userDao.getEmployeeList() ;
 	}
 
 }

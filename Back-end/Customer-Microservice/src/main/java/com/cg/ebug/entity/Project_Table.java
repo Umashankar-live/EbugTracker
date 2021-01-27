@@ -7,108 +7,83 @@ import javax.persistence.Id;
 
 @Entity
 public class Project_Table {
-	
-@Id
-@GeneratedValue(strategy=GenerationType.AUTO)
-private Long id;
 
-private String projectName;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long projectId;
 
-private String projectDescription;
+	private String projectName;
 
-private String projectId;
+	private String projectDescription;
 
-private String frontendTechno;
+	private String frontendTechno;
 
-private String backendTechno;
+	private String backendTechno;
 
-private String createdByAdminId;
+	private String projectManager;
 
+	public Project_Table() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-private String projectManager;
+	public Project_Table(Long projectId, String projectName, String projectDescription, String frontendTechno,
+			String backendTechno, String projectManager) {
+		super();
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.projectDescription = projectDescription;
+		this.frontendTechno = frontendTechno;
+		this.backendTechno = backendTechno;
+		this.projectManager = projectManager;
+	}
 
+	public Long getProjectId() {
+		return projectId;
+	}
 
-public Project_Table() {
-	super();
-	// TODO Auto-generated constructor stub
-}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
 
-public Long getId() {
-	return id;
-}
+	public String getProjectName() {
+		return projectName;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
-public String getProjectName() {
-	return projectName;
-}
+	public String getProjectDescription() {
+		return projectDescription;
+	}
 
-public void setProjectName(String projectName) {
-	this.projectName = projectName;
-}
+	public void setProjectDescription(String projectDescription) {
+		this.projectDescription = projectDescription;
+	}
 
-public String getProjectDescription() {
-	return projectDescription;
-}
+	public String getFrontendTechno() {
+		return frontendTechno;
+	}
 
-public void setProjectDescription(String projectDescription) {
-	this.projectDescription = projectDescription;
-}
+	public void setFrontendTechno(String frontendTechno) {
+		this.frontendTechno = frontendTechno;
+	}
 
-public String getProjectId() {
-	return projectId;
-}
+	public String getBackendTechno() {
+		return backendTechno;
+	}
 
-public void setProjectId(String projectId) {
-	this.projectId = projectId;
-}
+	public void setBackendTechno(String backendTechno) {
+		this.backendTechno = backendTechno;
+	}
 
-public String getFrontendTechno() {
-	return frontendTechno;
-}
+	public String getProjectManager() {
+		return projectManager;
+	}
 
-public void setFrontendTechno(String frontendTechno) {
-	this.frontendTechno = frontendTechno;
-}
-
-public String getBackendTechno() {
-	return backendTechno;
-}
-
-public void setBackendTechno(String backendTechno) {
-	this.backendTechno = backendTechno;
-}
-
-public String getProjectManager() {
-	return projectManager;
-}
-
-public void setProjectManager(String projectManager) {
-	this.projectManager = projectManager;
-}
-
-public Project_Table(Long id, String projectName, String projectDescription, String projectId, String frontendTechno,
-		String backendTechno, String createdByAdminId, String projectManager) {
-	super();
-	this.id = id;
-	this.projectName = projectName;
-	this.projectDescription = projectDescription;
-	this.projectId = projectId;
-	this.frontendTechno = frontendTechno;
-	this.backendTechno = backendTechno;
-	this.createdByAdminId = createdByAdminId;
-	this.projectManager = projectManager;
-}
-
-public String getCreatedByAdminId() {
-	return createdByAdminId;
-}
-
-public void setCreatedByAdminId(String createdByAdminId) {
-	this.createdByAdminId = createdByAdminId;
-}
-
+	public void setProjectManager(String projectManager) {
+		this.projectManager = projectManager;
+	}
 
 }

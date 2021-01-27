@@ -5,52 +5,61 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.ebug.entity.CriticalLevel_Table;
-import com.cg.ebug.entity.Employee_Table;
-import com.cg.ebug.entity.Status_Table;
 import com.cg.ebug.entity.Ticket_Table;
-import com.cg.ebug.service.IEmplyeeService;
+import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.service.IEmployeeService;
 
-@Controller
+@RestController
+@CrossOrigin("http://localhost:4200")
+@RequestMapping("/employee")
 public class EmployeeController {
-	
+
 	@Autowired
-	IEmplyeeService employeeService;
-	
-	@PostMapping("/addstatus")
-	ResponseEntity<Status_Table> createStatus(@RequestBody Status_Table status) {
-	    return new ResponseEntity<Status_Table>(employeeService.addStatus(status), HttpStatus.OK);
+	IEmployeeService employeeService;
+
+	// http://localhost:8094/employee/assigntickettoOther/
+	@GetMapping("/assigntickettoOther/{ticketID}/{empID}")
+	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId,
+			@PathVariable("empID") Long empId) {
+		Ticket_Table newTicket = this.employeeService.getTicketById(ticketId);
+		System.out.println(newTicket);
+		newTicket.setAssignedToEmployee(empId);
+		newTicket.setIsAssigned(true);
+		return new ResponseEntity<Ticket_Table>(employeeService.assignTicketToEmployeeByEmployee(newTicket),
+				HttpStatus.OK);
 	}
-	
-	@PostMapping("/addcritical")
-	ResponseEntity<CriticalLevel_Table> createCriticalLevel(@RequestBody CriticalLevel_Table critical) {
-	    return new ResponseEntity<CriticalLevel_Table>(employeeService.addCriticalLevel(critical), HttpStatus.OK);
+
+	// http://localhost:8094/employee/sendSolution/
+	@PutMapping("/sendSolution/{ticketID}")
+	ResponseEntity<Ticket_Table> sendSolutionToCustomer(@RequestBody Ticket_Table ticket,
+			@PathVariable("ticketID") Long ticketId) {
+		Ticket_Table newTicket = this.employeeService.getTicketById(ticketId);
+		System.out.println(newTicket);
+		newTicket.setSolution(ticket.getSolution());
+		newTicket.setIsResolved(true);
+
+		return new ResponseEntity<Ticket_Table>(employeeService.updateTicketByEmployeeForSolution(newTicket),
+				HttpStatus.OK);
 	}
-	
-	@PostMapping("/loginEmployee")
-	ResponseEntity<Employee_Table> loginEmployee(@RequestBody Employee_Table employee) {
-	    return new ResponseEntity<Employee_Table>(employeeService.login(employee.getEmailId(), employee.getPassword()), HttpStatus.OK);
+
+	// http://localhost:8094/employee/getemplist/
+	@GetMapping("/getemplist/{empID}")
+	ResponseEntity<Employee_Table> getEmpList(@PathVariable("empID") Long empId) {
+		return new ResponseEntity<Employee_Table>(this.employeeService.getEmpList(empId), HttpStatus.OK);
 	}
-	
-	@GetMapping("/ticketbystatusid/{id}/{employeeId}")
-	ResponseEntity<List<Ticket_Table>> getTicketsByStatusId(@PathVariable("id") Long id, @PathVariable("employeeId") Long employeeId) {
-	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getTicketByStatus(id,employeeId), HttpStatus.OK);
-	}
-	
-	@GetMapping("/ticketbycriticalid/{id}/{employeeId}")
-	ResponseEntity<List<Ticket_Table>> getTicketsByCriticalId(@PathVariable("id") Long id,@PathVariable("employeeId") Long employeeId) {
-	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getTicketByCriticalLevelId(id,employeeId), HttpStatus.OK);
-	}
-	
-	@GetMapping("/ticketbyprojectid/{id}/{employeeId}")
-	ResponseEntity<List<Ticket_Table>> getTicketsByProjectId(@PathVariable("id") Long id,@PathVariable("employeeId") Long employeeId) {
-	    return new ResponseEntity<List<Ticket_Table>>(employeeService.getTicketByProjectId(id,employeeId), HttpStatus.OK);
+
+	// http://localhost:8094/employee/getTicketlist/
+	@GetMapping("/getTicketlist/{empID}")
+	ResponseEntity<List<Ticket_Table>> getTicketList(@PathVariable("empID") Long empId) {
+		return new ResponseEntity<List<Ticket_Table>>(this.employeeService.getTicketList(empId), HttpStatus.OK);
 	}
 
 }

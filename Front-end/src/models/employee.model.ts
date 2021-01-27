@@ -5,5 +5,6 @@ export class Employee {
     mobileNo: number;
     password: string;
     role : string;
+    projectName : string ;
 
 }

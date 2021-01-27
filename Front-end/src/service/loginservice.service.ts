@@ -5,15 +5,14 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Login } from 'src/models/login.model';
 import { Employee } from 'src/models/employee.model';
+import { Ticket } from 'src/models/ticket.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginserviceService {
-
-
-
-
+ 
+  
   login_url = "http://localhost:9002/EtrackingSystem/login";
   registration_url = "http://localhost:9002/EtrackingSystem/user/addUser";
   getUser_url = "http://localhost:9002/EtrackingSystem/user/searchUser/"
@@ -34,8 +33,15 @@ export class LoginserviceService {
     return this.http.get<Employee>(this.getUser_url + userId);
   }
 
-  updateUser(user: Employee, userId: string) {
+  public updateUser(user: Employee, userId: string) {
     return this.http.put<Employee>("http://localhost:9002/EtrackingSystem/user/updateUser/"+userId, user);
   }
+
+  public fetchAllEmployee() {
+   return this.http.get<Employee[]>("http://localhost:9002/EtrackingSystem/user/getAllUser");
+  }
+
+ 
+
 
 }

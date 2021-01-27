@@ -20,69 +20,83 @@
             <div class="card-body">
               <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                  <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input type="text" class="form-control" placeholder="Enter Your Username" name="username"
-                    required pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="employee.userName"
-                    #Name="ngModel" [class.is-invalid]="Name.invalid && Name.touched">
+                <input type="text" class="form-control" placeholder="Enter Your Username" name="username" required
+                  pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="employee.userName" #Name="ngModel"
+                  [class.is-invalid]="Name.invalid && Name.touched">
                 <div *ngIf="Name.errors && (Name.invalid && Name.touched)">
-                    <small class="text-danger" *ngIf="Name.errors.required">username is required
-                        field</small>
-                    <small class="text-danger" *ngIf="Name.errors.pattern">Enter the valid username (Do not
-                        use special symbols/First letter must be capital)</small>
+                  <small class="text-danger" *ngIf="Name.errors.required">username is required
+                    field</small>
+                  <small class="text-danger" *ngIf="Name.errors.pattern">Enter the valid username (Do not
+                    use special symbols/First letter must be capital)</small>
                 </div>
-            </div>
+              </div>
 
-            <div class="form-group input-group">
+              <div class="form-group input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                  <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter Project Name" name="projectname" required
+                  pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="employee.projectName" #pName="ngModel"
+                  [class.is-invalid]="pName.invalid && pName.touched">
+                <div *ngIf="pName.errors && (pName.invalid && pName.touched)">
+                  <small class="text-danger" *ngIf="pName.errors.required">Project name is required
+                    field</small>
+                  <small class="text-danger" *ngIf="pName.errors.pattern">Enter the valid Project name (Do not
+                    use special symbols/First letter must be capital)</small>
+                </div>
+              </div>
+
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
                 <input type="email" class="form-control" placeholder="Enter Your Email-Id" name="email"
-                    [(ngModel)]="employee.emailId" required
-                    pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" #email="ngModel"
-                    [class.is-invalid]="email.invalid && email.touched">
+                  [(ngModel)]="employee.emailId" required
+                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" #email="ngModel"
+                  [class.is-invalid]="email.invalid && email.touched">
                 <div *ngIf="email.errors && (email.invalid && email.touched)">
-                    <small class="text-danger" *ngIf="email.errors.required">Email Id is required
-                        field</small>
-                    <small class="text-danger" *ngIf="email.errors.pattern">Enter the valid email Id</small>
+                  <small class="text-danger" *ngIf="email.errors.required">Email Id is required
+                    field</small>
+                  <small class="text-danger" *ngIf="email.errors.pattern">Enter the valid email Id</small>
 
                 </div>
-            </div>
+              </div>
 
-            <div class="form-group input-group">
+              <div class="form-group input-group">
                 <!-- <label>Contact Number: </label> -->
                 <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fas fa-phone"></i> </span>
+                  <span class="input-group-text"> <i class="fas fa-phone"></i> </span>
                 </div>
                 <input type="text" class="form-control" [(ngModel)]="employee.mobileNo" name="mobileNo" required
-                    placeholder="Enter Your Phone number" pattern="[6-9][0-9]{9}" #mobileNo=ngModel
-                    [class.is-invalid]="mobileNo.invalid && mobileNo.touched">
+                  placeholder="Enter Your Phone number" pattern="[6-9][0-9]{9}" #mobileNo=ngModel
+                  [class.is-invalid]="mobileNo.invalid && mobileNo.touched">
                 <div *ngIf="mobileNo.errors && (mobileNo.invalid && mobileNo.touched)">
-                    <small class="text-danger" *ngIf="mobileNo.errors.required">Contact Number is required
-                        field</small>
-                    <small class="text-danger" *ngIf="mobileNo.errors.pattern">Enter the valid mobile
-                        number</small>
+                  <small class="text-danger" *ngIf="mobileNo.errors.required">Contact Number is required
+                    field</small>
+                  <small class="text-danger" *ngIf="mobileNo.errors.pattern">Enter the valid mobile
+                    number</small>
 
                 </div>
-            </div>
+              </div>
 
 
-            <div class="form-group input-group">
+              <div class="form-group input-group">
                 <!-- <label for="pwd">Password:</label> -->
                 <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                  <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input type={{regType}} class="form-control" placeholder="Enter Your Password"
-                    name="password" [(ngModel)]="employee.password" required #pass="ngModel"
-                    [class.is-invalid]="pass.invalid && pass.touched">
+                <input type={{regType}} class="form-control" placeholder="Enter Your Password" name="password"
+                  [(ngModel)]="employee.password" required #pass="ngModel"
+                  [class.is-invalid]="pass.invalid && pass.touched">
                 <div class="input-group-append">
-                    <span class="input-group-text"><a class="fa fa-eye clickable"
-                            (click)='regToggle()'></a></span>
+                  <span class="input-group-text"><a class="fa fa-eye clickable" (click)='regToggle()'></a></span>
                 </div>
                 <div *ngIf="pass.errors && (pass.invalid && pass.touched)">
-                    <small class="text-danger" *ngIf="pass.errors.required">password required</small>
+                  <small class="text-danger" *ngIf="pass.errors.required">password required</small>
                 </div>
-            </div>
+              </div>
 
             </div>
             <div class="card-footer">

@@ -41,7 +41,7 @@
           </button>
         </div>
 
-        
+
         <div class="alert alert-success" *ngIf='isUpdated'>
           <button href="#" class="close" (click)='isUpdated = false'>&times;</button>
           <small><strong>SUCCESS !</strong> Your Details Have Been Updated... !!</small>
@@ -65,11 +65,11 @@
                   <p class="errorText">Enter correct email Id.</p>
                 </span>
               </div>
-              
+
 
               <div class="form-group">
                 <input type="text" placeholder="Mobile No." name="mobile" class="form-control" [(ngModel)]='mobile'
-                  #Mobile="ngModel"  required>
+                  #Mobile="ngModel" required>
                 <span *ngIf='!Mobile.valid && Mobile.touched'>
                   <p class="errorText">Enter Mobile.</p>
                 </span>

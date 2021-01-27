@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { AdminDashBoardComponent } from './admin-dash-board/admin-dash-board.component';
 import { LoginComponent } from './login/login.component';
 import { CustomerDashBoardComponent } from './customer-dash-board/customer-dash-board.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +19,13 @@ import { EmployeeDashBoardComponent } from './employee-dash-board/employee-dash-
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
 import { BugDetailComponent } from './customer/bug-detail/bug-detail.component';
 import { PersonalDetailsComponent } from './customer/personal-details/personal-details.component';
+import { ListTicketComponent } from './admin/list-ticket/list-ticket.component';
+import { UpdateTicketComponent } from './admin/update-ticket/update-ticket.component';
+import { AssignTicketComponent } from './admin/assign-ticket/assign-ticket.component';
+import { SelectEmployeeComponent } from './admin/select-employee/select-employee.component';
+import { AssignedTicketComponent } from './employee/assigned-ticket/assigned-ticket.component';
+import { SendSolutionComponent } from './employee/send-solution/send-solution.component';
+import { AssignEmployeeComponent } from './employee/assign-employee/assign-employee.component';
 
 
 
@@ -38,6 +45,13 @@ import { PersonalDetailsComponent } from './customer/personal-details/personal-d
     RaiseTicketComponent,
     BugDetailComponent,
     PersonalDetailsComponent,
+    ListTicketComponent,
+    UpdateTicketComponent,
+    AssignTicketComponent,
+    SelectEmployeeComponent,
+    AssignedTicketComponent,
+    SendSolutionComponent,
+    AssignEmployeeComponent,
     
     
   ],
@@ -49,7 +63,8 @@ import { PersonalDetailsComponent } from './customer/personal-details/personal-d
     BrowserAnimationsModule,
     NgbModule,
     NgxPaginationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
