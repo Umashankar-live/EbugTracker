@@ -16,9 +16,9 @@
                 <br>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <button class="dropdown-item" (click)='ticket = tempTicket'>All</button>
-                  <button class="dropdown-item" (click)='viewPending()'>Pending</button>
-                  <button class="dropdown-item" (click)='viewProcessing()'>Processing</button>
-                  <button class="dropdown-item" (click)='viewIntiated()'>Intiated</button>
+                    <button class="dropdown-item" (click)='viewOpen()'>Open</button>
+                    <button class="dropdown-item" (click)='viewPending()'>Pending</button>
+                    <button class="dropdown-item" (click)='viewClose()'>Close</button>
                 </div>
             </div>
 
@@ -112,9 +112,9 @@
                                         [(ngModel)]="currentstatus">
                                         <option style="text-align: center;" value="null" disabled>Select
                                             Critical Status</option>
+                                        <option value="open">Open</option>
                                         <option value="pending">Pending</option>
-                                        <option value="intiated">Intiated</option>
-                                        <option value="processing">processing</option>
+                                        <option value="close">Close</option>
                                     </select>
                                 </div>  
 

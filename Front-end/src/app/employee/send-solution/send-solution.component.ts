@@ -66,13 +66,14 @@ export class SendSolutionComponent implements OnInit {
     }
   }
 
-  viewProcessing() {
-    this.ticket = this.tempTicket.filter(ticketBean => ticketBean.status == 'processing')
+  viewOpen() {
+    this.ticket = this.tempTicket.filter(ticketBean => ticketBean.status == 'open')
   }
 
-  viewIntiated() {
-    this.ticket = this.tempTicket.filter(ticketBean => ticketBean.status == 'intiated')
+  viewClose() {
+    this.ticket = this.tempTicket.filter(ticketBean => ticketBean.status == 'close')
   }
+
 
   viewLow() {
     this.ticket = this.tempTicket.filter(ticketBean => ticketBean.criticalLevel == 'low')

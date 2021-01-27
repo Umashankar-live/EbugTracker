@@ -15,10 +15,10 @@
                   id="dropdownBasic1" ngbDropdownToggle>View By Status</button>
               <br>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button class="dropdown-item" (click)='ticket = tempTicket'>All</button>
-                  <button class="dropdown-item" (click)='viewPending()'>Pending</button>
-                  <button class="dropdown-item" (click)='viewProcessing()'>Processing</button>
-                  <button class="dropdown-item" (click)='viewIntiated()'>Intiated</button>
+                <button class="dropdown-item" (click)='ticket = tempTicket'>All</button>
+                <button class="dropdown-item" (click)='viewOpen()'>Open</button>
+                <button class="dropdown-item" (click)='viewPending()'>Pending</button>
+                <button class="dropdown-item" (click)='viewClose()'>Close</button>
               </div>
           </div>
 

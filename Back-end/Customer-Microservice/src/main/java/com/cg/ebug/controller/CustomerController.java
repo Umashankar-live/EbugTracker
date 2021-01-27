@@ -77,7 +77,7 @@ public class CustomerController {
 				file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
 		record.setIsResolved(false);
 		record.setSolution("pending");
-		record.setStatus("pending");
+		record.setStatus("open");
 		record.setIsAssigned(false);
 		record.setCriticalLevel("low");
 		if (record != null) {
