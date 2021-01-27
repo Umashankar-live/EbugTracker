@@ -96,6 +96,7 @@ export class SendSolutionComponent implements OnInit {
       this.service.sendSolution(raisedTicket,this.ticketId ).subscribe(res => {
         console.log(res)
         this.isUpdated = true
+       
 
       })
     }

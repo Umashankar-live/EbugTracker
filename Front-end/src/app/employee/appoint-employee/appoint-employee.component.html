@@ -1,0 +1,42 @@
+<div class="bg-image">
+  <div>
+      <div class="container" style="overflow-x: auto;">
+          <h1 class="text-center"><i class="fas fa-user"></i>&nbsp;Employee List</h1>
+          <div class="input-group mb-3 float-left col-md-3">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                      <i class="fa fa-search"></i>
+                  </span>
+              </div>
+              <input (keyup)='onKeyUpAll($event)' class="form-control" placeholder="Search By UserName..." />
+          </div>
+              
+          <table class="table table-striped table-bordered " style="color:black;font-weight:bold;font-size:18px;">
+              <caption *ngIf='!isLoaded'>
+                  <div class="spinner spinner-border"></div> Loading...
+              </caption>
+              <thead style="color: aliceblue;font-size:18px;" class="clickable">
+                  <td (click)='sortByEmployeeId()'> <i *ngIf='sortByEmployeeId' class="fa fa-sort"></i>Employee Id</td>
+                  <td>Employee Name</td>
+                  <td>EmailId</td>
+                  <td>Mobile No</td>
+                  <td>Project Name</td>
+                  <td>Assign</td>
+
+              </thead>
+              <tbody>
+                  <tr *ngFor='let e of employee| paginate: { itemsPerPage: bucketSize, currentPage: page}'>
+                      <td>{{e.empId}}</td>
+                      <td>{{e.userName}}</td>
+                      <td>{{e.emailId}}</td>
+                      <td>{{e.mobileNo}}</td>
+                      <td>{{e.projectName}}</td>
+                      <td><button type="button" class="btn btn-success" (click)='selectEmployee(e.empId)'><span class="btn-label"><i class="fas fa-user"></i></span> Appoint </button></td>
+
+
+                  </tr>
+              </tbody>
+          </table>
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+  </div>

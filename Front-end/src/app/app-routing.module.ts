@@ -17,6 +17,7 @@ import { BugDetailComponent } from './customer/bug-detail/bug-detail.component';
 import { AssignedTicketComponent } from './employee/assigned-ticket/assigned-ticket.component';
 import { SendSolutionComponent } from './employee/send-solution/send-solution.component';
 import { AssignEmployeeComponent } from './employee/assign-employee/assign-employee.component';
+import { AppointEmployeeComponent } from './employee/appoint-employee/appoint-employee.component';
 
 
 
@@ -51,7 +52,8 @@ const routes: Routes = [
     path: 'employee/dashboard', component: EmployeeDashBoardComponent, children: [
       {path:'assignedTicket' , component : AssignedTicketComponent},
       {path:'sendSolution',component:SendSolutionComponent},
-      {path:'assignEmployee',component:AssignEmployeeComponent}
+      {path:'assignEmployee',component:AssignEmployeeComponent},
+      {path:'appointElse/:ticketId',component:AppointEmployeeComponent}
     ], canActivate: [AuthGuard]
   },
 

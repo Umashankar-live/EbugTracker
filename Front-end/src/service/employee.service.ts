@@ -9,6 +9,11 @@ import { Ticket } from 'src/models/ticket.model';
 export class EmployeeService {
   
   
+  assignTicket(empId: number, ticketId: number) {
+    return this.http.get<any>("http://localhost:8094/employee/assigntickettoOther/"+ticketId+"/"+empId);
+  }
+  
+  
   sendSolution(raisedTicket: Ticket, ticketId: number) {
     return this.http.put<any>("http://localhost:8094/employee/sendSolution/"+ticketId,raisedTicket);
   }
