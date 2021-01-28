@@ -44,7 +44,7 @@ public class EmployeeController {
 		Ticket_Table newTicket = this.employeeService.getTicketById(ticketId);
 		System.out.println(newTicket);
 		newTicket.setSolution(ticket.getSolution());
-		newTicket.setIsResolved(true);
+		
 
 		return new ResponseEntity<Ticket_Table>(employeeService.updateTicketByEmployeeForSolution(newTicket),
 				HttpStatus.OK);

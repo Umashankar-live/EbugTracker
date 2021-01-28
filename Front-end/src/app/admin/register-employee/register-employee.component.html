@@ -22,14 +22,17 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input type="text" class="form-control" placeholder="Enter Your Username" name="username" required
-                  pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="employee.userName" #Name="ngModel"
-                  [class.is-invalid]="Name.invalid && Name.touched">
-                <div *ngIf="Name.errors && (Name.invalid && Name.touched)">
-                  <small class="text-danger" *ngIf="Name.errors.required">username is required
+                <input type="text" name="firstName" id="firstName" #firstName='ngModel' [(ngModel)]="employee.firstName"
+                  class="form-control" placeholder="Enter firstName" required firstName minlength="3"
+                  pattern="[a-zA-Z ]*">
+                <div *ngIf='firstName.errors && (firstName.invalid && firstName.touched)'>
+                  <small class="text-danger" *ngIf="firstName.errors.required">firstName is required
                     field</small>
-                  <small class="text-danger" *ngIf="Name.errors.pattern">Enter the valid username (Do not
-                    use special symbols/First letter must be capital)</small>
+                  <small class="text-danger" *ngIf="firstName.errors.pattern">This field
+                    accepts only name</small>
+
+                  <small class="text-danger" *ngIf="firstName.errors.minlength"> accepts minimum 3
+                    characters</small>
                 </div>
               </div>
 
@@ -37,29 +40,48 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
-                <input type="text" class="form-control" placeholder="Enter Project Name" name="projectname" required
-                  pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="employee.projectName" #pName="ngModel"
-                  [class.is-invalid]="pName.invalid && pName.touched">
-                <div *ngIf="pName.errors && (pName.invalid && pName.touched)">
-                  <small class="text-danger" *ngIf="pName.errors.required">Project name is required
+                <input type="text" name="lastName" id="lastName" #lastName='ngModel' [(ngModel)]="employee.lastName"
+                  class="form-control" placeholder="Enter lastName" required lastName minlength="4"
+                  pattern="[a-zA-Z ]*">
+                <div *ngIf='lastName.errors && (lastName.invalid && lastName.touched)'>
+                  <small class="text-danger" *ngIf="lastName.errors.required">lastName is required
                     field</small>
-                  <small class="text-danger" *ngIf="pName.errors.pattern">Enter the valid Project name (Do not
-                    use special symbols/First letter must be capital)</small>
+                  <small class="text-danger" *ngIf="lastName.errors.pattern">This field
+                    accepts only name</small>
+
+                  <small class="text-danger" *ngIf="lastName.errors.minlength"> accepts minimum 4
+                    characters</small>
                 </div>
               </div>
 
               <div class="form-group input-group">
                 <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fas fa-file-powerpoint"></i> </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter Project Envolved" name="ProjectName" required
+                  pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="employee.projectName" #pName="ngModel"
+                  [class.is-invalid]="pName.invalid && pName.touched">
+                <div *ngIf="pName.errors && (pName.invalid && pName.touched)">
+                  <small class="text-danger" *ngIf="pName.errors.required">Project Name is required
+                    field</small>
+                  <small class="text-danger" *ngIf="pName.errors.pattern">Enter the valid Project Name (Do not
+                    use special symbols/First letter must be capital)</small>
+                </div>
+              </div>
+
+
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
                   <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
-                <input type="email" class="form-control" placeholder="Enter Your Email-Id" name="email"
-                  [(ngModel)]="employee.emailId" required
-                  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" #email="ngModel"
+                <input type="email" class="form-control" placeholder="Enter Your Email-Id" name="currentEmail"
+                  [(ngModel)]="employee.emailId" required pattern=".+@gmail.com" #email="ngModel"
                   [class.is-invalid]="email.invalid && email.touched">
                 <div *ngIf="email.errors && (email.invalid && email.touched)">
                   <small class="text-danger" *ngIf="email.errors.required">Email Id is required
                     field</small>
-                  <small class="text-danger" *ngIf="email.errors.pattern">Enter the valid email Id</small>
+                  <small class="text-danger" *ngIf="email.errors.pattern">Enter the valid email
+                    Id</small>
 
                 </div>
               </div>

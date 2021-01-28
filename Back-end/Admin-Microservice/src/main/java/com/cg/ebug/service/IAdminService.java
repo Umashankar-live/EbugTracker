@@ -13,7 +13,7 @@ public interface IAdminService {
 
 	Ticket_Table getTicketById(Long id);
 
-//	 Ticket_Table createTicket(Ticket_Table ticket);
+//	Ticket_Table createTicket(Ticket_Table ticket);
 	Ticket_Table updateTicketByAdmin(Ticket_Table ticket);
 
 	Project_Table addProject(Project_Table project);

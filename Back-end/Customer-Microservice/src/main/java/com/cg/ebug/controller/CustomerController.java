@@ -59,6 +59,7 @@ public class CustomerController {
 		System.out.println(newTicket);
 		newTicket.setTitle(ticket.getTitle());
 		newTicket.setDescription(ticket.getDescription());
+		newTicket.setIsResolved(ticket.getIsResolved());
 
 		return new ResponseEntity<Ticket_Table>(this.customerService.updateTicketByCustomer(newTicket), HttpStatus.OK);
 	}

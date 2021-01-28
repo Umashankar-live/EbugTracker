@@ -16,7 +16,7 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 	@Query(value = "Select * from TICKET_TABLE a WHERE a.is_resolved =false AND a.is_assigned =false ",  nativeQuery = true)
 	public List<Ticket_Table> findAllTicket();
 
-	@Query(value = "Select * from TICKET_TABLE a WHERE a.is_resolved =false ",  nativeQuery = true)
+	@Query(value = "Select * from TICKET_TABLE ",  nativeQuery = true)
 	List<Ticket_Table> findAllTicketForUpdate();
 
 

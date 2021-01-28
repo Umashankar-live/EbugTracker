@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.ebug.entity.Employee_Table;
 import com.cg.ebug.dao.EmployeeDao;
+import com.cg.ebug.exception.EbugException;
 import com.cg.ebug.exception.NoValueFoundException;
 import com.cg.ebug.exception.NotPossibleException;
 
@@ -25,7 +26,19 @@ public class UserServiceImpl implements UserServiceInterface {
 	 */
 	@Override
 	public Employee_Table addUser(Employee_Table user) {
-		return this.userDao.save(user);
+		try {
+			List<Employee_Table> EmployeeList = userDao.findAll();
+			for (Employee_Table isExists : EmployeeList) {
+				if (isExists.getEmailId().equalsIgnoreCase(user.getEmailId())) {
+					throw new EbugException("Customer already Exists");
+				}
+			}
+			user.setRole("customer");
+			return userDao.save(user);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return null;
+		}
 		
 	}
 

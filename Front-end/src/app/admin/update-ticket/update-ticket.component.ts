@@ -82,7 +82,7 @@ export class UpdateTicketComponent implements OnInit {
 
   //Sort by allocation id
   sortByTicketId() {
-    this.ticket.sort(this.sortByProperty('ticketId'))
+    this.ticket.sort(this.sortByProperty('id'))
     this.sortedByTicketId = true
   }
 
@@ -94,7 +94,7 @@ export class UpdateTicketComponent implements OnInit {
       else if (a[property] < b[property])
         return -1;
 
-      return 0;
+      
     }
   }
 

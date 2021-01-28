@@ -12,7 +12,7 @@ public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
 
 	
 	// employee
-	@Query(value = "Select * from TICKET_TABLE a WHERE a.is_resolved=false AND a.is_assigned=true AND a.assigned_To_Employee=:employeeId", nativeQuery = true)
+	@Query(value = "Select * from TICKET_TABLE a WHERE  a.status !='close' AND a.assigned_To_Employee=:employeeId", nativeQuery = true)
 	public List<Ticket_Table> FindTicketByEmployee( @Param("employeeId") Long employeeId);
 	
 }

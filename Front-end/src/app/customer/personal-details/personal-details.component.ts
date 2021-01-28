@@ -14,12 +14,15 @@ export class PersonalDetailsComponent implements OnInit {
   custId: string;
   user: Employee;
 
-  userName: string;
-  email: string;
-  mobile: number;
-  password: string;
+
+  currentFirstName: string
+  currentLastName: string
+  currentEmail: string
+  currentMobile: string
+  currentPassword: number
   isErrorUpdating: boolean = false;
   isUpdated: boolean;
+  regType: string;
 
 
   constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService) {
@@ -45,9 +48,10 @@ export class PersonalDetailsComponent implements OnInit {
 
     if (form.valid) {
       let user = new Employee()
-      user.userName = form.value.userNAme
-      user.emailId = form.value.email
-      user.mobileNo = form.value.mobile
+      user.firstName = form.value.firstName
+      user.lastName = form.value.lastName
+      user.emailId = form.value.emailId
+      user.mobileNo = form.value.mobileNumber
       user.password = form.value.password
       // user.userId = sessionStorage.getItem('custId')
 
@@ -62,4 +66,15 @@ export class PersonalDetailsComponent implements OnInit {
   reload() {
     this.ngOnInit();
   }
+
+
+
+  //For view password
+  regToggle() {
+    if (this.regType == "password")
+      this.regType = "text"
+    else
+      this.regType = "password"
+  }
+  
 }

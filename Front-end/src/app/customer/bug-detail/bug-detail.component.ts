@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router' ;
+import { Router } from '@angular/router';
 import { Ticket } from 'src/models/ticket.model';
-import {CustomerService} from 'src/service/customer.service';
+import { CustomerService } from 'src/service/customer.service';
 
 @Component({
   selector: 'app-bug-detail',
@@ -10,12 +10,12 @@ import {CustomerService} from 'src/service/customer.service';
   styleUrls: ['./bug-detail.component.css']
 })
 export class BugDetailComponent implements OnInit {
-  ticket : Ticket[]= [] ;
-  tempTicket : Ticket[] = [];
+  ticket: Ticket[] = [];
+  tempTicket: Ticket[] = [];
   ticketBean: Ticket = new Ticket();
 
-  bucketSize: number = 5 ;
-  page : number = 1 ;
+  bucketSize: number = 5;
+  page: number = 1;
 
   //Flags required for interactive UI
   isAdded: boolean = null
@@ -34,10 +34,11 @@ export class BugDetailComponent implements OnInit {
   retrievedImage: any;
   base64Data: any
   ticketId: number;
-  currentTitle : string 
-  currentDescription: string 
+  currentTitle: string
+  currentDescription: string
+  currentisResolved: boolean
 
-  constructor(private route : Router , private service : CustomerService) { }
+  constructor(private route: Router, private service: CustomerService) { }
 
   ngOnInit() {
 
@@ -47,13 +48,13 @@ export class BugDetailComponent implements OnInit {
         this.isLoaded = true
         this.ticket = res;
         this.tempTicket = res
-        
+
       }
     )
 
   }
-  
-  
+
+
 
   viewPending() {
     this.ticket = this.tempTicket.filter(ticketBean => ticketBean.status == 'pending')
@@ -93,10 +94,15 @@ export class BugDetailComponent implements OnInit {
       let raisedTicket = new Ticket()
       raisedTicket.title = form.value.ticketTitle
       raisedTicket.description = form.value.ticketDesc
-     
-      
+      console.log(form.value.isTicketResolved)
+      if (form.value.isTicketResolved == "true") 
+      { raisedTicket.isResolved = true; }
+      else {
+        raisedTicket.isResolved = false;
+      }
 
-      this.service.updateTicket(raisedTicket,this.ticketId ).subscribe(res => {
+
+      this.service.updateTicket(raisedTicket, this.ticketId).subscribe(res => {
         console.log(res)
         this.isUpdated = true
 
@@ -112,6 +118,6 @@ export class BugDetailComponent implements OnInit {
 
 
 
-  
+
 
 }

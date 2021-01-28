@@ -3,7 +3,9 @@ package com.cg.ebug.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.ebug.entity.Login;
+import com.cg.ebug.exception.UserAlreadyRegisterd;
 import com.cg.ebug.entity.Employee_Table;
 import com.cg.ebug.service.LoginService;
 import com.cg.ebug.service.UserServiceInterface;
@@ -40,11 +43,11 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Employee_Table loginUser(@RequestBody Login user) {
-		String tempUsername = user.getUserName();
+		String tempEmailId = user.getEmailId();
 		String tempPassword = user.getPassword();
 		Employee_Table userObj ;
-		if (tempUsername != null && tempPassword != null) {
-			userObj = service.getUserByUserNameAndPassword(tempUsername, tempPassword);
+		if (tempEmailId != null && tempPassword != null) {
+			userObj = service.getUserByEmailIdAndPassword(tempEmailId, tempPassword);
 			return userObj ;
 		}
 			
@@ -54,9 +57,15 @@ public class LoginController {
 	
 	    //http://localhost:9002/user/addUser
 		@RequestMapping(value = "user/addUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public Employee_Table addUser(  @RequestBody Employee_Table user) {
-			user.setRole("customer");
-			return this.userService.addUser(user);
+		public ResponseEntity<Employee_Table> addUser(  @RequestBody Employee_Table user) {
+			
+			
+			Employee_Table response = userService.addUser(user);
+			if(response == null) {
+
+				throw new UserAlreadyRegisterd("400", "User Alredy Register");			
+			}
+			 return new ResponseEntity<Employee_Table>(response, HttpStatus.OK);
 		}
 		
 
@@ -82,7 +91,8 @@ public class LoginController {
 		@RequestMapping(value = "user/updateUser/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		public Employee_Table updateUser(@RequestBody Employee_Table user,@PathVariable Long userId) {
 			Employee_Table newUser = this.userService.searchUser(userId);
-			newUser.setUserName(user.getUserName());
+			newUser.setFirstName(user.getFirstName());
+			newUser.setLastName(user.getLastName());
 			newUser.setPassword(user.getPassword());
 			newUser.setMobileNo(user.getMobileNo());
 			newUser.setEmailId(user.getEmailId());	

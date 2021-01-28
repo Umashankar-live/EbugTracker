@@ -27,7 +27,7 @@
               <tbody>
                   <tr *ngFor='let e of employee| paginate: { itemsPerPage: bucketSize, currentPage: page}'>
                       <td>{{e.empId}}</td>
-                      <td>{{e.userName}}</td>
+                      <td>{{e.firstName}}</td>
                       <td>{{e.emailId}}</td>
                       <td>{{e.mobileNo}}</td>
                       <td>{{e.projectName}}</td>

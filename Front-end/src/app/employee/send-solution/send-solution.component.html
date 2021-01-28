@@ -105,7 +105,7 @@
 
               <div class="alert alert-success" *ngIf='isUpdated'>
                   <button href="#" class="close" (click)='isUpdated = false'>&times;</button>
-                  <small><strong>SUCCESS !</strong> Ticket Have Been Updated... !!</small>
+                  <small><strong>SUCCESS !</strong> The Solution has been sent... !!</small>
               </div>
 
 
@@ -124,9 +124,8 @@
 
 
                           <div class="card-footer">
-                              <button type="submit" [disabled]='!updateForm.valid' class="btn btn-primary"><i
-                                      class="fa fa-sync" aria-hidden="true"></i>
-                                   Solution</button>
+                              <button type="submit" [disabled]='!updateForm.valid' class="btn btn-primary"><i class="fas fa-comment-dots"></i>
+                                   &nbsp;Solution</button>
 
                           </div>
                       </div>

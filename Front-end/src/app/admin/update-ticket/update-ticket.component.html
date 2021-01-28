@@ -38,13 +38,14 @@
                     <div class="spinner spinner-border"></div> Loading...
                 </caption>
                 <thead style="color: aliceblue;font-size:18px;" class="clickable">
-                    <td (click)='sortByTicketId()'> <i *ngIf='sortByTicketId()' class="fa fa-sort"></i>Ticket Id</td>
+                    <td (click)='sortByTicketId()'> <i *ngIf='sortedByTicketId' class="fa fa-sort"></i>Ticket Id</td>
                     <td>Title</td>
                     <td>Description</td>
                     <td>Solution</td>
                     <td>Customer ID</td>
                     <td>Status</td>
                     <td>Assigned to Employee</td>
+                    <td>Is Resolved</td>
                     <td>CriticalLevel</td>
                     <td>Project Name</td>
                     <td>Update Ticket</td>
@@ -58,6 +59,7 @@
                         <td>{{t.custId}}</td>
                         <td>{{t.status}}</td>
                         <td>{{t.assignedToEmployee}}</td>
+                        <td>{{t.isResolved}}</td>
                         <td>{{t.criticalLevel}}</td>
                         <td>{{t.projectName}}</td>
                         <td><button data-toggle="modal" data-target="#updateModal" (click)='

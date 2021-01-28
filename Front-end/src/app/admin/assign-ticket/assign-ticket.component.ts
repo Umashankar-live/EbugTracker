@@ -50,7 +50,7 @@ export class AssignTicketComponent implements OnInit {
   
   //Sort by allocation id
   sortByTicketId() {
-    this.ticket.sort(this.sortByProperty('ticketId'))
+    this.ticket.sort(this.sortByProperty('id'))
     this.sortedByTicketId = true
   }
 

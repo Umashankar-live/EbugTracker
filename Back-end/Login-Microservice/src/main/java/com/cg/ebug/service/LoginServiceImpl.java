@@ -14,11 +14,7 @@ public class LoginServiceImpl implements LoginService {
 	private EmployeeDao userDao;
 
 
-	@Override
-	public Employee_Table getUserByUserName(String userName) {
-		return userDao.findByUserName(userName);
-		 
-	}
+	
 
 	@Override
 	public Employee_Table addUser(Employee_Table user) {
@@ -27,8 +23,8 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public Employee_Table getUserByUserNameAndPassword(String tempUsername, String tempPassword) {
-		return userDao.findByUserNameAndPassword(tempUsername,tempPassword);
+	public Employee_Table getUserByEmailIdAndPassword(String tempEmaiId, String tempPassword) {
+		return userDao.findByEmailIdAndPassword(tempEmaiId,tempPassword);
 	}
 
 }

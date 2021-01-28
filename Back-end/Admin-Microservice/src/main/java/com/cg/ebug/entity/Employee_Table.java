@@ -14,7 +14,10 @@ public class Employee_Table {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long empId;
 	@Column
-	private String userName;
+	private String firstName;
+	
+	@Column
+	private String lastName ;
 	
 	@Column
 	private String projectName;
@@ -36,11 +39,12 @@ public class Employee_Table {
 
 
 
-	public Employee_Table(long empId, String userName, String projectName, String emailId, long mobileNo,
-			String password, String role) {
+	public Employee_Table(long empId, String firstName, String lastName, String projectName, String emailId,
+			long mobileNo, String password, String role) {
 		super();
 		this.empId = empId;
-		this.userName = userName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.projectName = projectName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
@@ -62,14 +66,26 @@ public class Employee_Table {
 
 
 
-	public String getUserName() {
-		return userName;
+	public String getFirstName() {
+		return firstName;
 	}
 
 
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 
@@ -132,13 +148,11 @@ public class Employee_Table {
 		this.role = role;
 	}
 
+    
 
+	
+	
 
-	
-	
-	
-	
-	
 	
 	
 }

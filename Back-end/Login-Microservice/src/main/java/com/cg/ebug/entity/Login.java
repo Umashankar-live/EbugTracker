@@ -2,20 +2,23 @@ package com.cg.ebug.entity;
 
 public class Login {
 	
-	private String userName;
+	private String emailId;
 	private String password;
 
 	public Login() {
 
 	}
 
-	public String getUserName() {
-		return userName;
+	
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
+
 
 	public String getPassword() {
 		return password;

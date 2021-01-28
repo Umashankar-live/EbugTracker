@@ -1,6 +1,7 @@
 export class Employee {
     empId: string;
-    userName: string;
+    firstName: string;
+    lastName : string ;
     emailId: string;
     mobileNo: number;
     password: string;

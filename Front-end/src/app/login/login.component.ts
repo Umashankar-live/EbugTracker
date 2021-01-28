@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   msg = '';
 
   //custId : string = null
-  userName: string = null
+  emailId: string = null
   password: string = null
   userType: string = null
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log("exception occured")
-        this.msg = "User with same username already exist";
+        this.msg = "User with same emailId already exist";
       })
   }
 
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       let login = new Login();
 
-      login.userName = this.userName
+      login.emailId = this.emailId
       login.password = this.password
       console.log(login)
       this.loginservice.loginUser(login).subscribe(
@@ -104,14 +104,14 @@ export class LoginComponent implements OnInit {
           }
           else if (res.role == "customer") {
             sessionStorage.setItem('custId', res.empId)
-            sessionStorage.setItem('uName', res.userName)
+            sessionStorage.setItem('uName', res.firstName)
             sessionStorage.setItem('userType', window.btoa("customer"))
             this.Auth.setLoggedIn(true);
             this.router.navigate(['customer/dashboard'])
           }
           else if (res.role == "employee") {
             sessionStorage.setItem('empId', res.empId)
-            sessionStorage.setItem('eName', res.userName)
+            sessionStorage.setItem('eName', res.firstName)
             sessionStorage.setItem('userType', window.btoa("employee"))
             this.Auth.setLoggedIn(true);
             this.router.navigate(['employee/dashboard'])
