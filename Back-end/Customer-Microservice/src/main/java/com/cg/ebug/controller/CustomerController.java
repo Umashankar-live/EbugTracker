@@ -41,7 +41,7 @@ public class CustomerController {
 		EntityResponse errorDetails = new EntityResponse();
 		Ticket_Table getTicket = customerService.viewTicketById(id);
 		if (getTicket != null) {
-			errorDetails.setMessage("Ticket viewed successfully");
+			errorDetails.setMessage("Ticket is viewed successfully");
 			errorDetails.setError(false);
 			errorDetails.setTicketTable(getTicket);
 			return errorDetails;
