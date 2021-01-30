@@ -26,16 +26,17 @@ public class EmployeeController {
 	IEmployeeService employeeService;
 
 	// http://localhost:8094/employee/assigntickettoOther/
-	@GetMapping("/assigntickettoOther/{ticketID}/{empID}")
-	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId,
-			@PathVariable("empID") Long empId) {
+	@GetMapping("/assigntickettoOther/{ticketID}/{empID}/{empName}")
+	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @PathVariable("empID") Long empId,
+			@PathVariable("empName") String employeeName) {
 		Ticket_Table newTicket = this.employeeService.getTicketById(ticketId);
 		System.out.println(newTicket);
 		newTicket.setAssignedToEmployee(empId);
+		newTicket.setEmployeeName(employeeName);
 		newTicket.setIsAssigned(true);
-		return new ResponseEntity<Ticket_Table>(employeeService.assignTicketToEmployeeByEmployee(newTicket),
-				HttpStatus.OK);
+		return new ResponseEntity<Ticket_Table>(employeeService.assignTicketToEmployeeByEmployee(newTicket), HttpStatus.OK);
 	}
+
 
 	// http://localhost:8094/employee/sendSolution/
 	@PutMapping("/sendSolution/{ticketID}")

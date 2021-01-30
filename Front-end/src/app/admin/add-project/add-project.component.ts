@@ -18,6 +18,8 @@ export class AddProjectComponent implements OnInit {
 
   constructor(private service : AdminService) {
        this.project = new Project() ;
+       this.project.backendTechno = null ;
+       this.project.frontendTechno = null ;
                
    }
 

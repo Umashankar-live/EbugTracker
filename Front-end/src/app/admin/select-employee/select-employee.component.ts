@@ -70,7 +70,7 @@ export class SelectEmployeeComponent implements OnInit {
   }
 
   onKeyUpAll(event: any) {
-    this.employee = this.employee.filter(EmployeeBean => EmployeeBean.userName.includes(event.target.value))
+    this.employee = this.employee.filter(EmployeeBean => EmployeeBean.firstName.includes(event.target.value))
     if (event.target.value == '' || event.target.value == undefined) {
       this.employee = this.tempEmployee ;
     }

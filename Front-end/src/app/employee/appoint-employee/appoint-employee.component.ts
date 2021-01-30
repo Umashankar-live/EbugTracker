@@ -68,16 +68,16 @@ export class AppointEmployeeComponent implements OnInit {
   }
 
   onKeyUpAll(event: any) {
-    this.employee = this.employee.filter(EmployeeBean => EmployeeBean.userName.includes(event.target.value))
+    this.employee = this.employee.filter(EmployeeBean => EmployeeBean.firstName.includes(event.target.value))
     if (event.target.value == '' || event.target.value == undefined) {
       this.employee = this.tempEmployee ;
     }
   }
 
   
-  selectEmployee(empId: number){
+  selectEmployee(empId: number,empName : string){
 
-    this.employeeService.assignTicket(empId , this.ticketId).subscribe(
+    this.employeeService.assignTicket(empId, empName , this.ticketId).subscribe(
       data => {
         console.log("response received");
         console.log(data);

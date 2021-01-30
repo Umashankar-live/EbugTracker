@@ -6,6 +6,7 @@ import { User } from 'src/models/user.model';
 import { LoginserviceService } from 'src/service/loginservice.service';
 import {AuthService} from 'src/service/auth.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   user: User;
   userr: User;
-  msg = '';
+  isFailed: boolean = false
 
   //custId : string = null
   emailId: string = null
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log("exception occured")
-        this.msg = "User with same emailId already exist";
+        this.isFailed = true ;
       })
   }
 

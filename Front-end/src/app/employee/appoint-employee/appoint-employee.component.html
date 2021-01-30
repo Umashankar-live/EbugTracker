@@ -8,7 +8,7 @@
                       <i class="fa fa-search"></i>
                   </span>
               </div>
-              <input (keyup)='onKeyUpAll($event)' class="form-control" placeholder="Search By UserName..." />
+              <input (keyup)='onKeyUpAll($event)' class="form-control" placeholder="Search By firstName..." />
           </div>
               
           <table class="table table-striped table-bordered " style="color:black;font-weight:bold;font-size:18px;">
@@ -31,7 +31,7 @@
                       <td>{{e.emailId}}</td>
                       <td>{{e.mobileNo}}</td>
                       <td>{{e.projectName}}</td>
-                      <td><button type="button" class="btn btn-success" (click)='selectEmployee(e.empId)'><span class="btn-label"><i class="fas fa-user"></i></span> Appoint </button></td>
+                      <td><button type="button" class="btn btn-success" (click)='selectEmployee(e.empId,e.firstName)'><span class="btn-label"><i class="fas fa-user"></i></span> Appoint </button></td>
 
 
                   </tr>

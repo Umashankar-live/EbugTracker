@@ -13,6 +13,7 @@
                         <h4 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"
                             class=" display-4 text-center">Login</h4>
                     </div>
+
                     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
                         <div class="card-body">
 
@@ -91,6 +92,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="alert alert-danger" *ngIf='isFailed'>
+                        <button href="#" class="close" (click)='isFailed = false'>&times;</button>
+                        <small><strong>FAILURE !</strong> Email-Id Already Registered... !!</small>
+                    </div>
 
                     <form #registerform=ngForm (ngSubmit)="registerUser();registerform.reset();">
 
