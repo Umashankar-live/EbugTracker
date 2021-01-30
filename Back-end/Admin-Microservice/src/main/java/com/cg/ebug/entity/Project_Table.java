@@ -28,10 +28,6 @@ public class Project_Table {
 	}
 
 	
-    
-	
-
-
 
 	public Project_Table(Long projectId, String projectName, String projectDescription, String frontendTechno,
 			String backendTechno, String projectManager) {

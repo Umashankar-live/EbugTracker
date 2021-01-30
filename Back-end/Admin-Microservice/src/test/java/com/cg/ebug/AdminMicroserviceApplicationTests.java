@@ -29,6 +29,7 @@ class AdminMicroserviceApplicationTests {
 	
 	@MockBean
 	private Employee_Repositroy employeeRepositroy ;
+	
 
 	@Test
 	public void addEmployee() {
@@ -39,21 +40,13 @@ class AdminMicroserviceApplicationTests {
 		Assertions.assertEquals(employee.getEmpId(), service.registerEmployee(employee).getEmpId());
 	}
 	
-	/*
-	 * @Test public void addProject() { Project_Table project = new
-	 * Project_Table(1L, "Project001", "this is the descrption",
-	 * "Angular","Springboot","Rupa Rani");
-	 * 
-	 * when(projectRepository.save(project));
-	 * System.out.println(project.getProjectId());
-	 * Assertions.assertEquals(project.getProjectName(),
-	 * service.addProject(project).getProjectName()); }
-	 */
 	
-	
-	
-	
-	
-	
+	  @Test public void addProject() 
+	  { Project_Table project = new Project_Table(1L, "Project001", "this is the descrption","Angular","Springboot","Rupa Rani");
+	  
+	  when(projectRepository.save(project));
+	  System.out.println(project.getProjectId());
+	  Assertions.assertEquals(project.getProjectName(),
+	  service.addProject(project).getProjectName()); }	
 
 }
