@@ -77,9 +77,9 @@ export class SelectEmployeeComponent implements OnInit {
   }
 
   
-  selectEmployee(empId: number){
+  selectEmployee(empId: number,empName : string){
 
-    this.adminService.assignTicket(empId , this.ticketId).subscribe(
+    this.adminService.assignTicket(empId ,empName, this.ticketId).subscribe(
       data => {
         console.log("response received");
         console.log(data);

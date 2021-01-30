@@ -10,7 +10,7 @@ import { Ticket } from 'src/models/ticket.model';
 })
 
 export class AdminService {
- 
+
 
 
   constructor(private http: HttpClient) {
@@ -46,22 +46,22 @@ export class AdminService {
   }
 
   updateTicket(raisedTicket: Ticket, ticketId: number) {
-    return this.http.put<Ticket>("http://localhost:9090/admin/updateticket/"+ticketId, raisedTicket);
+    return this.http.put<Ticket>("http://localhost:9090/admin/updateticket/" + ticketId, raisedTicket);
   }
 
-  assignTicket(empId: number, ticketId: number) {
+  assignTicket(empId: number, empName: string, ticketId: number) {
 
-     return this.http.get<Ticket>("http://localhost:9090/admin/assignticket/"+ticketId+"/"+empId);
-   
+    return this.http.get<Ticket>("http://localhost:9090/admin/assignticket/" + ticketId + "/" + empId+"/"+empName);
+
   }
 
   fetchAllTicketForUpdate() {
     return this.http.get<Ticket[]>("http://localhost:9090/admin/updateticketList")
   }
-  
-  
-  
-  
+
+
+
+
 
 
 }

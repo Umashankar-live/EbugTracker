@@ -27,6 +27,12 @@ public class Project_Table {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+    
+	
+
+
+
 	public Project_Table(Long projectId, String projectName, String projectDescription, String frontendTechno,
 			String backendTechno, String projectManager) {
 		super();
@@ -37,6 +43,8 @@ public class Project_Table {
 		this.backendTechno = backendTechno;
 		this.projectManager = projectManager;
 	}
+
+
 
 	public Long getProjectId() {
 		return projectId;
