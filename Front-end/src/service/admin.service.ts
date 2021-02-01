@@ -10,6 +10,7 @@ import { Ticket } from 'src/models/ticket.model';
 })
 
 export class AdminService {
+  
 
 
 
@@ -58,6 +59,12 @@ export class AdminService {
   fetchAllTicketForUpdate() {
     return this.http.get<Ticket[]>("http://localhost:9090/admin/updateticketList")
   }
+
+
+  fetchAllProject() {
+    return this.http.get<Project[]>("http://localhost:9090/admin/getproject")
+  }
+  
 
 
 

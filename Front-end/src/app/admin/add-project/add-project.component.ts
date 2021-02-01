@@ -33,7 +33,6 @@ export class AddProjectComponent implements OnInit {
       data => {
         console.log("response received");
         this.isadded = true;
-        //alert('Employee Registration Successful! Please Login.')
         console.log(data);
         this.pro = data;
       },

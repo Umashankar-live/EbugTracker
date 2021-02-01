@@ -27,6 +27,7 @@ import { AssignedTicketComponent } from './employee/assigned-ticket/assigned-tic
 import { SendSolutionComponent } from './employee/send-solution/send-solution.component';
 import { AssignEmployeeComponent } from './employee/assign-employee/assign-employee.component';
 import { AppointEmployeeComponent } from './employee/appoint-employee/appoint-employee.component';
+import { ListProjectComponent } from './admin/list-project/list-project.component';
 
 
 
@@ -54,6 +55,7 @@ import { AppointEmployeeComponent } from './employee/appoint-employee/appoint-em
     SendSolutionComponent,
     AssignEmployeeComponent,
     AppointEmployeeComponent,
+    ListProjectComponent,
     
     
   ],

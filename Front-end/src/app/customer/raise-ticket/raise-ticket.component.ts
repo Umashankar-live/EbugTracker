@@ -28,7 +28,7 @@ export class RaiseTicketComponent implements OnInit {
 
   ngOnInit(): void {
     this.reactiveForms = this.fb.group({
-      title: new FormControl('', [Validators.required, Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)])]),
+      title: new FormControl('', [Validators.required, Validators.compose([Validators.pattern('[a-zA-Z0-9 ]*'), Validators.minLength(3)])]),
       description: new FormControl('', [Validators.required, Validators.compose([Validators.pattern('[a-zA-Z ]*'), Validators.minLength(3)])])
     });
   }

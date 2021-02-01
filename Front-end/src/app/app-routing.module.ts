@@ -18,6 +18,7 @@ import { AssignedTicketComponent } from './employee/assigned-ticket/assigned-tic
 import { SendSolutionComponent } from './employee/send-solution/send-solution.component';
 import { AssignEmployeeComponent } from './employee/assign-employee/assign-employee.component';
 import { AppointEmployeeComponent } from './employee/appoint-employee/appoint-employee.component';
+import { ListProjectComponent } from './admin/list-project/list-project.component';
 
 
 
@@ -34,7 +35,8 @@ const routes: Routes = [
       { path: 'pendingRequest', component: ListTicketComponent },
       { path: 'updateTicket', component: UpdateTicketComponent },
       { path: 'assignTicket', component: AssignTicketComponent },
-      {path: 'selectEmployee/:ticketId',component:SelectEmployeeComponent}
+      {path: 'selectEmployee/:ticketId',component:SelectEmployeeComponent},
+      {path:'listProject',component:ListProjectComponent}
     ], canActivate: [AuthGuard]
   },
 
