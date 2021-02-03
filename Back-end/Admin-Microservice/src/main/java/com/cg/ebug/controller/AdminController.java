@@ -2,6 +2,7 @@ package com.cg.ebug.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,15 @@ import com.cg.ebug.entity.Ticket_Table;
 import com.cg.ebug.exception.UserAlreadyRegisterd;
 import com.cg.ebug.service.IAdminService;
 
+/*
+ * @Autowired - The process of injection spring bean dependencies while initializing it
+ * @RequestMapping - for configuring URI mapping in controller handler methods 
+ * @PathVariable -  for mapping dynamic values from the URI to handler method arguments.
+ * @CrossOrigin - enables cross-origin resource sharing only for this specific method. By default, its allows all origins, 
+ *                all headers, and the HTTP methods specified in the @RequestMapping annotation
+ * @ResponseBody - annotation maps the HttpRequest body to a transfer or domain object
+ */
+
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/admin")
@@ -33,7 +43,7 @@ public class AdminController {
 		Employee_Table response = adminService.registerEmployee(employee);
 		if (response == null) {
 
-			throw new UserAlreadyRegisterd("400", "User Alredy Register");
+			throw new UserAlreadyRegisterd("400", "User Already Register");
 		}
 		return new ResponseEntity<Employee_Table>(response, HttpStatus.OK);
 	}

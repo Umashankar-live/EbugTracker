@@ -129,6 +129,15 @@ export class UpdateTicketComponent implements OnInit {
     this.ticket = this.tempTicket.filter(ticketBean => ticketBean.criticalLevel == 'high')
   }
 
+  viewFalse() {
+    this.ticket = this.tempTicket.filter(ticketBean => ticketBean.isResolved == false)
+  }
+
+  viewTrue() {
+    this.ticket = this.tempTicket.filter(ticketBean => ticketBean.isResolved == true)
+  }
+
+
 
   logout() {
     sessionStorage.clear();

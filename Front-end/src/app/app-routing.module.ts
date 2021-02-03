@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AuthGuard } from './auth.guard';
+import { ToastrModule } from 'ngx-toastr';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminDashBoardComponent } from './admin-dash-board/admin-dash-board.component';
 import { LoginComponent } from './login/login.component';
@@ -64,7 +65,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    ToastrModule.forRoot()],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

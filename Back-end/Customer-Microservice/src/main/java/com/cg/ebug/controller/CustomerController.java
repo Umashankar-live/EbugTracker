@@ -1,5 +1,14 @@
 package com.cg.ebug.controller;
 
+/*
+ * @Autowired - The process of injection spring bean dependencies while initializing it
+ * @RequestMapping - for configuring URI mapping in controller handler methods 
+ * @PathVariable -  for mapping dynamic values from the URI to handler method arguments.
+ * @CrossOrigin - enables cross-origin resource sharing only for this specific method. By default, its allows all origins, 
+ *                all headers, and the HTTP methods specified in the @RequestMapping annotation
+ * @ResponseBody - annotation maps the HttpRequest body to a transfer or domain object
+ */
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;

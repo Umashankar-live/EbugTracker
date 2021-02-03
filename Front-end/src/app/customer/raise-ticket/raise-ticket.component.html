@@ -25,15 +25,22 @@
                 <input type="text" name="title" id="title" formControlName="title" class="form-control"
                   placeholder="Enter title">
 
-                  <div *ngIf="reactiveForms.controls.title.errors && (reactiveForms.controls.title.touched || reactiveForms.controls.title.dirty)">
-                    <small class="text-danger" *ngIf="reactiveForms.hasError('required','title')"> Title is required</small>
-                    <small class="text-danger" *ngIf="reactiveForms.hasError('pattern','title')"> Title allows only numbers and characters </small>
-  
-                    <small class="text-danger" *ngIf="reactiveForms.hasError('minlength','title')"> Title must be atleast 3 characters long</small>
-                  </div>
-
-
               </div>
+
+
+              <div
+                *ngIf="reactiveForms.controls.title.errors && (reactiveForms.controls.title.touched || reactiveForms.controls.title.dirty)">
+                <small class="text-danger" *ngIf="reactiveForms.hasError('required','title')"> Title is
+                  required</small>
+                <small class="text-danger" *ngIf="reactiveForms.hasError('pattern','title')"> Title allows only
+                  numbers and characters </small>
+
+                <small class="text-danger" *ngIf="reactiveForms.hasError('minlength','title')"> Title must be atleast
+                  3 characters long</small>
+              </div>
+
+
+
 
 
               <div class="form-group input-group">
@@ -43,14 +50,19 @@
                 <input type="text" name="description" id="description" formControlName="description"
                   class="form-control" placeholder="Enter description">
 
-                  <div *ngIf="reactiveForms.controls.description.errors && (reactiveForms.controls.description.touched || reactiveForms.controls.description.dirty)">
-                    <small class="text-danger" *ngIf="reactiveForms.hasError('required','description')"> Description is required</small>
-                    <small class="text-danger" *ngIf="reactiveForms.hasError('pattern','description')"> Description allows only characters </small>
-  
-                    <small class="text-danger" *ngIf="reactiveForms.hasError('minlength','description')"> Description must be atleast 3 characters long</small>
-                  </div>
-
               </div>
+              <div
+                *ngIf="reactiveForms.controls.description.errors && (reactiveForms.controls.description.touched || reactiveForms.controls.description.dirty)">
+                <small class="text-danger" *ngIf="reactiveForms.hasError('required','description')"> Description is
+                  required</small>
+                <small class="text-danger" *ngIf="reactiveForms.hasError('pattern','description')"> Description allows
+                  only characters </small>
+
+                <small class="text-danger" *ngIf="reactiveForms.hasError('minlength','description')"> Description must
+                  be atleast 3 characters long</small>
+              </div>
+
+
 
 
               <div class="form-group input-group">
@@ -62,7 +74,7 @@
             </div>
             <div class="card-footer">
               <button type="submit" class="btn btn-dark " (click)='onUpload(reactiveForms)'><i
-                class="fa fa-plus"></i>&nbsp;Raise
+                  class="fa fa-plus"></i>&nbsp;Raise
                 Ticket</button>
             </div>
           </form>

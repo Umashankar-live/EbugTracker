@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="alert alert-success" *ngIf='isadded'>
     <button href="#" class="close" (click)='isadded = false'>&times;</button>
     <strong>SUCCESS !</strong> Project is added.
@@ -26,14 +27,14 @@
                 </div>
                 <input type="text" class="form-control" placeholder="Enter Project Name" name="ProjectName" required
                   pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="project.projectName" #pName="ngModel"
-                  [class.is-invalid]="pName.invalid && pName.touched">
+                  [class.is-invalid]="pName.invalid && pName.touched"> </div>
                 <div *ngIf="pName.errors && (pName.invalid && pName.touched)">
                   <small class="text-danger" *ngIf="pName.errors.required">Project Name is required
                     field</small>
                   <small class="text-danger" *ngIf="pName.errors.pattern">Enter the valid Project Name (Do not
                     use special symbols/First letter must be capital)</small>
                 </div>
-              </div>
+             
 
               <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -65,45 +66,49 @@
                   <option value="Django">Django</option>
                   <option value="NodeJs">NodeJs</option>
                 </select>
-              </div>  
-
-                <div class="form-group input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"> <i class="fas fa-user"></i> </span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Enter Project Manager" name="ProjectManager"
-                    required pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="project.projectManager" #mName="ngModel"
-                    [class.is-invalid]="mName.invalid && mName.touched">
-                  <div *ngIf="mName.errors && (mName.invalid && mName.touched)">
-                    <small class="text-danger" *ngIf="mName.errors.required">Project Manager Name is required
-                      field</small>
-                    <small class="text-danger" *ngIf="mName.errors.pattern">Enter the valid Name (Do not
-                      use special symbols/First letter must be capital)</small>
-                  </div>
-                </div>
-
-                <div class="form-group input-group">
-                  <textarea [(ngModel)]='project.projectDescription' rows="3" cols="80"
-                    placeholder="Enter Project Description" name="description" required
-                    [class.is-invalid]="pName.invalid && Name.touched" #descr='ngModel'>
-                </textarea>
-                  <div *ngIf="descr.errors && (descr.invalid && descr.touched)">
-                    <small class="text-danger" *ngIf="descr.errors.required">Project Description is required
-                      field</small>
-                  </div>
-                </div>
-
               </div>
-              <div class="card-footer">
 
-                <button class="btn btn-primary" type="submit" [disabled]="!addProjectForm.valid"><i
-                    class="fa fa-plus"></i>&nbsp;Add Project</button>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter Project Manager" name="ProjectManager"
+                  required pattern="^[A-Z][A-Za-z0-9_-]{3,19}$" [(ngModel)]="project.projectManager" #mName="ngModel"
+                  [class.is-invalid]="mName.invalid && mName.touched"> </div>
+                <div *ngIf="mName.errors && (mName.invalid && mName.touched)">
+                  <small class="text-danger" *ngIf="mName.errors.required">Project Manager Name is required
+                    field</small>
+                  <small class="text-danger" *ngIf="mName.errors.pattern">Enter the valid Name (Do not
+                    use special symbols/First letter must be capital)</small>
+                </div>
+             
 
-              </div>
+              <div class="form-group input-group">
+                <textarea [(ngModel)]='project.projectDescription' rows="3" cols="80"
+                  placeholder="Enter Project Description" name="description" required
+                  [class.is-invalid]="pName.invalid && Name.touched" #descr='ngModel'>
+                </textarea> </div>
+                <div *ngIf="descr.errors && (descr.invalid && descr.touched)">
+                  <small class="text-danger" *ngIf="descr.errors.required">Project Description is required
+                    field</small>
+                </div>
+             
+
+            </div>
+            <div class="card-footer">
+
+              <button class="btn btn-primary" type="submit" [disabled]="!addProjectForm.valid"><i
+                  class="fa fa-plus"></i>&nbsp;Add Project</button>
+
+            </div>
           </form>
+
         </div>
       </div>
       <div class="col-md-3"></div>
     </div>
   </div>
+
+
+
 </div>

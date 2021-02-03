@@ -7,6 +7,9 @@ import { CustomerDashBoardComponent } from './customer-dash-board/customer-dash-
 import { FormsModule ,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ToastrModule } from 'ngx-toastr';
+
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -68,7 +71,8 @@ import { ListProjectComponent } from './admin/list-project/list-project.componen
     NgbModule,
     NgxPaginationModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
