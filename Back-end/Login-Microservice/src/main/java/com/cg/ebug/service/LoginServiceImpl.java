@@ -3,7 +3,7 @@ package com.cg.ebug.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.entity.EmployeeTable;
 import com.cg.ebug.dao.EmployeeDao;
 
 @Service
@@ -17,13 +17,13 @@ public class LoginServiceImpl implements LoginService {
 	
 
 	@Override
-	public Employee_Table addUser(Employee_Table user) {
+	public EmployeeTable addUser(EmployeeTable user) {
 		user.setRole("customer");
 		return userDao.save(user);
 	}
 
 	@Override
-	public Employee_Table getUserByEmailIdAndPassword(String tempEmaiId, String tempPassword) {
+	public EmployeeTable getUserByEmailIdAndPassword(String tempEmaiId, String tempPassword) {
 		return userDao.findByEmailIdAndPassword(tempEmaiId,tempPassword);
 	}
 

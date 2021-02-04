@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Ticket } from 'src/models/ticket.model';
 import { AdminService } from 'src/service/admin.service';
 import { NgForm } from '@angular/forms';
+import { NotificationService } from 'src/service/notification.service';
 
 @Component({
   selector: 'app-update-ticket',
@@ -40,7 +41,7 @@ export class UpdateTicketComponent implements OnInit {
   allTickets: any[] = [];
   temptickets: Ticket[];
 
-  constructor(private router: ActivatedRoute,private route: Router, private service: AdminService) {
+  constructor(private router: ActivatedRoute,private route: Router, private service: AdminService,private notifyService : NotificationService) {
 
     
    }
@@ -70,11 +71,16 @@ export class UpdateTicketComponent implements OnInit {
 
       this.service.updateTicket(raisedTicket,this.ticketId ).subscribe(res => {
         console.log(res)
-        this.isUpdated = true
+        this.isUpdated = true;
+        this.showToasterSuccess();
 
       })
     }
   }
+
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Ticket Successfully Updated !!", "Update Ticket");
+} 
 
   reload() {
     this.ngOnInit();

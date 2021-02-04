@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Project_Table {
+public class ProjectTable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,14 +22,14 @@ public class Project_Table {
 
 	private String projectManager;
 
-	public Project_Table() {
+	public ProjectTable() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	
 
-	public Project_Table(Long projectId, String projectName, String projectDescription, String frontendTechno,
+	public ProjectTable(Long projectId, String projectName, String projectDescription, String frontendTechno,
 			String backendTechno, String projectManager) {
 		super();
 		this.projectId = projectId;

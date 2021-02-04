@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.ebug.entity.Login;
 import com.cg.ebug.exception.UserAlreadyRegisterd;
-import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.entity.EmployeeTable;
 import com.cg.ebug.service.LoginService;
 import com.cg.ebug.service.UserServiceInterface;
 
@@ -42,10 +42,10 @@ public class LoginController {
 	private UserServiceInterface userService ;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Employee_Table loginUser(@RequestBody Login user) {
+	public EmployeeTable loginUser(@RequestBody Login user) {
 		String tempEmailId = user.getEmailId();
 		String tempPassword = user.getPassword();
-		Employee_Table userObj ;
+		EmployeeTable userObj ;
 		if (tempEmailId != null && tempPassword != null) {
 			userObj = service.getUserByEmailIdAndPassword(tempEmailId, tempPassword);
 			return userObj ;
@@ -57,21 +57,21 @@ public class LoginController {
 	
 	    //http://localhost:9002/user/addUser
 		@RequestMapping(value = "user/addUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public ResponseEntity<Employee_Table> addUser(  @RequestBody Employee_Table user) {
+		public ResponseEntity<EmployeeTable> addUser(  @RequestBody EmployeeTable user) {
 			
 			
-			Employee_Table response = userService.addUser(user);
+			EmployeeTable response = userService.addUser(user);
 			if(response == null) {
 
 				throw new UserAlreadyRegisterd("400", "User Alredy Register");			
 			}
-			 return new ResponseEntity<Employee_Table>(response, HttpStatus.OK);
+			 return new ResponseEntity<EmployeeTable>(response, HttpStatus.OK);
 		}
 		
 
 		//http://localhost:9002/user/getAllUser
 		@GetMapping(value = "user/getAllUser")
-		public List<Employee_Table> getAllEmployee() {
+		public List<EmployeeTable> getAllEmployee() {
 			return this.userService.getAllUser();
 		}
 
@@ -83,14 +83,14 @@ public class LoginController {
 
 		//http://localhost:9002/user/searchUser/1
 		@GetMapping(value = "user/searchUser/{userId}")
-		public Employee_Table searchUserById(@PathVariable Long userId) {
+		public EmployeeTable searchUserById(@PathVariable Long userId) {
 			return this.userService.searchUser(userId);
 		}
 		
 		//http://localhost:9002/user/updateUser/1
 		@RequestMapping(value = "user/updateUser/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-		public Employee_Table updateUser(@RequestBody Employee_Table user,@PathVariable Long userId) {
-			Employee_Table newUser = this.userService.searchUser(userId);
+		public EmployeeTable updateUser(@RequestBody EmployeeTable user,@PathVariable Long userId) {
+			EmployeeTable newUser = this.userService.searchUser(userId);
 			newUser.setFirstName(user.getFirstName());
 			newUser.setLastName(user.getLastName());
 			newUser.setPassword(user.getPassword());

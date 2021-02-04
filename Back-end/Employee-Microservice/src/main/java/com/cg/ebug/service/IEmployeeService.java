@@ -2,21 +2,21 @@ package com.cg.ebug.service;
 
 import java.util.List;
 
-import com.cg.ebug.entity.Employee_Table;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.EmployeeTable;
+import com.cg.ebug.entity.TicketTable;
 
 public interface IEmployeeService {
 
-	Ticket_Table getTicketById(Long ticketId);
+	TicketTable getTicketById(Long ticketId);
 
-	Employee_Table getEmpList(Long empId);
+	EmployeeTable getEmpList(Long empId);
 
-	Ticket_Table assignTicketToEmployeeByEmployee(Ticket_Table newTicket);
+	TicketTable assignTicketToEmployeeByEmployee(TicketTable newTicket);
 
 
-	Ticket_Table updateTicketByEmployeeForSolution(Ticket_Table newTicket);
+	TicketTable updateTicketByEmployeeForSolution(TicketTable newTicket);
 
-	List<Ticket_Table> getTicketList(Long empId);
+	List<TicketTable> getTicketList(Long empId);
 	
     
     

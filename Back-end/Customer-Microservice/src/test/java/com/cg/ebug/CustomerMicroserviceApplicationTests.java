@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.cg.ebug.dao.Ticket_Repository;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.service.CustomerService;
 
 

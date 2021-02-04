@@ -86,7 +86,7 @@
               <div class="form-group input-group">
                 <textarea [(ngModel)]='project.projectDescription' rows="3" cols="80"
                   placeholder="Enter Project Description" name="description" required
-                  [class.is-invalid]="pName.invalid && Name.touched" #descr='ngModel'>
+                  [class.is-invalid]="descr.invalid && descr.touched" #descr='ngModel'>
                 </textarea> </div>
                 <div *ngIf="descr.errors && (descr.invalid && descr.touched)">
                   <small class="text-danger" *ngIf="descr.errors.required">Project Description is required

@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.TicketTable;
 
-public interface Ticket_Repository extends JpaRepository<Ticket_Table, Long> {
+public interface Ticket_Repository extends JpaRepository<TicketTable, Long> {
 
-	Optional<Ticket_Table> findTicketById(Long id);
+	Optional<TicketTable> findTicketById(Long id);
 
-	@Query(value = "select t from Ticket_Table t where t.custId=:custId" )
-	List<Ticket_Table> findTicketsByCustId(@Param("custId") long custId);
+	@Query(value = "select t from TicketTable t where t.custId=:custId" )
+	List<TicketTable> findTicketsByCustId(@Param("custId") long custId);
 }

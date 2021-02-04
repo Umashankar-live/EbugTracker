@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/models/employee.model';
 import { AdminService } from 'src/service/admin.service';
+import { NotificationService } from 'src/service/notification.service';
 
 @Component({
   selector: 'app-register-employee',
@@ -16,7 +17,7 @@ export class RegisterEmployeeComponent implements OnInit {
   isexist: boolean = false;
   regType: string;
 
-  constructor(private service: AdminService) {
+  constructor(private service: AdminService,private notifyService : NotificationService) {
     this.employee = new Employee();
   }
 
@@ -29,14 +30,26 @@ export class RegisterEmployeeComponent implements OnInit {
       data => {
         console.log("response received");
         this.isadded = true;
-        //alert('Employee Registration Successful! Please Login.')
+        this.showToasterSuccess();
         console.log(data);
         this.emp = data;
       },
       error => {
         this.isexist = true;
+        this.showToasterFailure();
       })
   }
+
+
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Data Successfully added !!", "Register Employee");
+} 
+
+
+ showToasterFailure(){
+   this.notifyService.showError("Employee already Registered","Register Employee")
+ }
+
 
 
    //For view password

@@ -13,12 +13,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.ebug.dao.Employee_Repositroy;
-import com.cg.ebug.dao.Project_Repository;
-import com.cg.ebug.dao.Ticket_Repository;
-import com.cg.ebug.entity.Employee_Table;
-import com.cg.ebug.entity.Project_Table;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.dao.EmployeeRepositroy;
+import com.cg.ebug.dao.ProjectRepository;
+import com.cg.ebug.dao.TicketRepository;
+import com.cg.ebug.entity.EmployeeTable;
+import com.cg.ebug.entity.ProjectTable;
+import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.exception.EbugException;
 
 @Service
@@ -26,18 +26,18 @@ import com.cg.ebug.exception.EbugException;
 public class AdminService implements IAdminService {
 
 	@Autowired
-	private Ticket_Repository ticketRepository;
+	private TicketRepository ticketRepository;
 	@Autowired
-	private Project_Repository projectRepository;
+	private ProjectRepository projectRepository;
 	@Autowired
-	private Employee_Repositroy employeeRepository;
+	private EmployeeRepositroy employeeRepository;
 
 	@Override
-	public List<Ticket_Table> getAllTickets() {
-		List<Ticket_Table> responseList = new ArrayList<Ticket_Table>();
-		List<Ticket_Table> ticketList  = ticketRepository.findAllTicket();
-		for (Ticket_Table tickets : ticketList) {
-			Ticket_Table ticket = new Ticket_Table();
+	public List<TicketTable> getAllTickets() {
+		List<TicketTable> responseList = new ArrayList<TicketTable>();
+		List<TicketTable> ticketList  = ticketRepository.findAllTicket();
+		for (TicketTable tickets : ticketList) {
+			TicketTable ticket = new TicketTable();
 			ticket.setId(tickets.getId());
 			ticket.setCustId(tickets.getCustId());
 			ticket.setTitle(tickets.getTitle());
@@ -64,7 +64,7 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Ticket_Table updateTicketByAdmin(Ticket_Table newticket) {
+	public TicketTable updateTicketByAdmin(TicketTable newticket) {
 		try {
 
 			return ticketRepository.save(newticket);
@@ -75,12 +75,12 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Project_Table addProject(Project_Table project) {
+	public ProjectTable addProject(ProjectTable project) {
 
 		try {
 
-			List<Project_Table> projectList = projectRepository.findAll();
-			for (Project_Table isExists : projectList) {
+			List<ProjectTable> projectList = projectRepository.findAll();
+			for (ProjectTable isExists : projectList) {
 				if (isExists.getProjectName().equalsIgnoreCase(project.getProjectName())) {
 					throw new EbugException("Project already Exists");
 				}
@@ -94,7 +94,7 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public List<Project_Table> getAllProject() {
+	public List<ProjectTable> getAllProject() {
 		try {
 			return projectRepository.findAll();
 		} catch (Exception ex) {
@@ -104,9 +104,9 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Project_Table getProjectByID(Long id) {
+	public ProjectTable getProjectByID(Long id) {
 		try {
-			Optional<Project_Table> data = projectRepository.findById(id);
+			Optional<ProjectTable> data = projectRepository.findById(id);
 			if (data.isPresent())
 				return data.get();
 		} catch (Exception ex) {
@@ -117,7 +117,7 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Ticket_Table assignTicketToEmployeeByAdmin(Ticket_Table newTicket) {
+	public TicketTable assignTicketToEmployeeByAdmin(TicketTable newTicket) {
 		// TODO Auto-generated method stub
 
 		try {
@@ -131,10 +131,10 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Ticket_Table getTicketById(Long id) {
+	public TicketTable getTicketById(Long id) {
 		// TODO Auto-generated method stub
 		try {
-			Optional<Ticket_Table> data = ticketRepository.findById(id);
+			Optional<TicketTable> data = ticketRepository.findById(id);
 			if (data.isPresent())
 				return data.get();
 			else {
@@ -148,10 +148,10 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public Employee_Table registerEmployee(Employee_Table employee) {
+	public EmployeeTable registerEmployee(EmployeeTable employee) {
 		try {
-			List<Employee_Table> EmployeeList = employeeRepository.findAll();
-			for (Employee_Table isExists : EmployeeList) {
+			List<EmployeeTable> EmployeeList = employeeRepository.findAll();
+			for (EmployeeTable isExists : EmployeeList) {
 				if (isExists.getEmailId().equalsIgnoreCase(employee.getEmailId())) {
 					throw new EbugException("Employee already Exists");
 				}
@@ -182,8 +182,8 @@ public class AdminService implements IAdminService {
 	}
 
 	@Override
-	public List<Ticket_Table> updateticketList() {
-		List<Ticket_Table> ticketList = ticketRepository.findAllTicketForUpdate();
+	public List<TicketTable> updateticketList() {
+		List<TicketTable> ticketList = ticketRepository.findAllTicketForUpdate();
 
 		if (ticketList.size() == 0) {
 			return null;

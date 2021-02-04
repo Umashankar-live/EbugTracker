@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Entity
 @Table(name = "ticket_table")
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class Ticket_Table {
+public class TicketTable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -48,20 +48,33 @@ public class Ticket_Table {
 	
 	private String projectName;
 
-	public Ticket_Table() {
+	public TicketTable() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ticket_Table(long custId, String title, String description, String name, String type, byte[] picByte) {
+	
+	public TicketTable(Long id, long custId, String title, String description, String solution, String name,
+			String type, byte[] picByte, String status, String criticalLevel, Boolean isResolved,
+			long assignedToEmployee, String employeeName, Boolean isAssigned, String projectName) {
 		super();
+		this.id = id;
 		this.custId = custId;
 		this.title = title;
 		this.description = description;
+		this.solution = solution;
 		this.name = name;
 		this.type = type;
 		this.picByte = picByte;
+		this.status = status;
+		this.criticalLevel = criticalLevel;
+		this.isResolved = isResolved;
+		this.assignedToEmployee = assignedToEmployee;
+		this.employeeName = employeeName;
+		this.isAssigned = isAssigned;
+		this.projectName = projectName;
 	}
+
 
 	public Long getId() {
 		return id;

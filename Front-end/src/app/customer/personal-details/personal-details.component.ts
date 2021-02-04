@@ -3,6 +3,7 @@ import { LoginserviceService } from 'src/service/loginservice.service';
 import { Employee } from 'src/models/employee.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { NotificationService } from 'src/service/notification.service';
 
 @Component({
   selector: 'app-personal-details',
@@ -25,7 +26,7 @@ export class PersonalDetailsComponent implements OnInit {
   regType: string;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService) {
+  constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService,private notifyService : NotificationService) {
 
     this.user = new Employee();
 
@@ -44,6 +45,11 @@ export class PersonalDetailsComponent implements OnInit {
 
   }
 
+
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Details Successfully Updated !!", "Personal Details");
+} 
+
   onUpdate(form: NgForm) {
 
     if (form.valid) {
@@ -58,6 +64,7 @@ export class PersonalDetailsComponent implements OnInit {
       this.service.updateUser(user, sessionStorage.getItem('custId')).subscribe(res => {
         console.log(res)
         this.isUpdated = true
+        this.showToasterSuccess();
 
       })
     }

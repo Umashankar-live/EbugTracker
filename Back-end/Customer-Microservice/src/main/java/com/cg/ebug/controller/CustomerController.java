@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cg.ebug.dao.Ticket_Repository;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.exception.EntityResponse;
 import com.cg.ebug.service.ICustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,7 +48,7 @@ public class CustomerController {
 		// return new ResponseEntity<Ticket_Table>(customerService.viewTicketById(id),
 		// HttpStatus.OK);
 		EntityResponse errorDetails = new EntityResponse();
-		Ticket_Table getTicket = customerService.viewTicketById(id);
+		TicketTable getTicket = customerService.viewTicketById(id);
 		if (getTicket != null) {
 			errorDetails.setMessage("Ticket is viewed successfully");
 			errorDetails.setError(false);
@@ -62,15 +62,15 @@ public class CustomerController {
 	}
 
 	@PutMapping("/updateTicketByCustomer/{ticketId}")
-	ResponseEntity<Ticket_Table> updateTicketsByCustomer(@RequestBody Ticket_Table ticket,
+	ResponseEntity<TicketTable> updateTicketsByCustomer(@RequestBody TicketTable ticket,
 			@PathVariable("ticketId") Long ticketId) {
-		Ticket_Table newTicket = this.customerService.viewTicketById(ticketId);
+		TicketTable newTicket = this.customerService.viewTicketById(ticketId);
 		System.out.println(newTicket);
 		newTicket.setTitle(ticket.getTitle());
 		newTicket.setDescription(ticket.getDescription());
 		newTicket.setIsResolved(ticket.getIsResolved());
 
-		return new ResponseEntity<Ticket_Table>(this.customerService.updateTicketByCustomer(newTicket), HttpStatus.OK);
+		return new ResponseEntity<TicketTable>(this.customerService.updateTicketByCustomer(newTicket), HttpStatus.OK);
 	}
 
 	@SuppressWarnings("unused")
@@ -81,9 +81,9 @@ public class CustomerController {
 		System.out.println("Original Image Byte Size - " + file.getBytes().length);
 		EntityResponse response = new EntityResponse();
 		long customerId = Long.parseLong(custId);
-		Ticket_Table ticket = new ObjectMapper().readValue(user, Ticket_Table.class);
+		TicketTable ticket = new ObjectMapper().readValue(user, TicketTable.class);
 
-		Ticket_Table record = new Ticket_Table(customerId, ticket.getTitle(), ticket.getDescription(),
+		TicketTable record = new TicketTable(customerId, ticket.getTitle(), ticket.getDescription(),
 				file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
 		record.setIsResolved(false);
 		record.setSolution("pending");
@@ -104,9 +104,9 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = { "/viewTicketByCustId/{custId}" })
-	public List<Ticket_Table> getImage(@PathVariable("custId") Long custId) throws IOException {
+	public List<TicketTable> getImage(@PathVariable("custId") Long custId) throws IOException {
 		EntityResponse response = new EntityResponse();
-		List<Ticket_Table> responseList = customerService.getAllTicketsByCustomerId(custId);
+		List<TicketTable> responseList = customerService.getAllTicketsByCustomerId(custId);
 		if (responseList != null && responseList.size() != 0) {
 			response.setMessage("Tickets Fetched successfully");
 			response.setError(false);

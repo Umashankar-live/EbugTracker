@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ticket } from 'src/models/ticket.model';
 import { CustomerService } from 'src/service/customer.service';
+import { NotificationService } from 'src/service/notification.service';
 
 @Component({
   selector: 'app-bug-detail',
@@ -38,7 +39,7 @@ export class BugDetailComponent implements OnInit {
   currentDescription: string
   currentisResolved: boolean
 
-  constructor(private route: Router, private service: CustomerService) { }
+  constructor(private route: Router, private service: CustomerService,private notifyService : NotificationService) { }
 
   ngOnInit() {
 
@@ -104,12 +105,18 @@ export class BugDetailComponent implements OnInit {
 
       this.service.updateTicket(raisedTicket, this.ticketId).subscribe(res => {
         console.log(res)
-        this.isUpdated = true
+        //this.isUpdated = true
+        this.showToasterSuccess();
+
 
       })
     }
 
   }
+
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Ticket Successfully Updated !!", "Update Ticket");
+} 
 
   reload() {
     this.ngOnInit();

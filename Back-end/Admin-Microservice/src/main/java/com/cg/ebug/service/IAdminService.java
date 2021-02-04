@@ -3,30 +3,29 @@ package com.cg.ebug.service;
 import java.util.List;
 
 
-import com.cg.ebug.entity.Employee_Table;
-import com.cg.ebug.entity.Project_Table;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.EmployeeTable;
+import com.cg.ebug.entity.ProjectTable;
+import com.cg.ebug.entity.TicketTable;
 
 public interface IAdminService {
 
-	List<Ticket_Table> getAllTickets();
+	List<TicketTable> getAllTickets();
 
-	Ticket_Table getTicketById(Long id);
+	TicketTable getTicketById(Long id);
 
-//	Ticket_Table createTicket(Ticket_Table ticket);
-	Ticket_Table updateTicketByAdmin(Ticket_Table ticket);
+	TicketTable updateTicketByAdmin(TicketTable ticket);
 
-	Project_Table addProject(Project_Table project);
+	ProjectTable addProject(ProjectTable project);
 
-	List<Project_Table> getAllProject();
+	List<ProjectTable> getAllProject();
 
-	Project_Table getProjectByID(Long id);
+	ProjectTable getProjectByID(Long id);
 
 	
 
-	Ticket_Table assignTicketToEmployeeByAdmin(Ticket_Table newTicket);
+	TicketTable assignTicketToEmployeeByAdmin(TicketTable newTicket);
 
-	Employee_Table registerEmployee(Employee_Table customer);
+	EmployeeTable registerEmployee(EmployeeTable customer);
 
 	long countProject();
 
@@ -34,6 +33,6 @@ public interface IAdminService {
 
 	long countPending();
 
-	List<Ticket_Table> updateticketList();
+	List<TicketTable> updateticketList();
 
 }

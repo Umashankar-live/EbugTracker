@@ -13,25 +13,25 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.ebug.dao.Employee_Repository;
-import com.cg.ebug.dao.Ticket_Repository;
-import com.cg.ebug.entity.Employee_Table;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.dao.EmployeeRepository;
+import com.cg.ebug.dao.TicketRepository;
+import com.cg.ebug.entity.EmployeeTable;
+import com.cg.ebug.entity.TicketTable;
 
 @Service
 @Transactional
 public class EmployeeService implements IEmployeeService {
 
 	@Autowired
-	private Ticket_Repository ticketRepository;
+	private TicketRepository ticketRepository;
 
 	@Autowired
-	private Employee_Repository employeeRepository;
+	private EmployeeRepository employeeRepository;
 
 	@Override
-	public Ticket_Table getTicketById(Long ticketId) {
+	public TicketTable getTicketById(Long ticketId) {
 		try {
-			Optional<Ticket_Table> data = ticketRepository.findById(ticketId);
+			Optional<TicketTable> data = ticketRepository.findById(ticketId);
 			if (data.isPresent())
 				return data.get();
 			else {
@@ -44,13 +44,13 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public Employee_Table getEmpList(Long empId) {
+	public EmployeeTable getEmpList(Long empId) {
 
 		return this.employeeRepository.findById(empId).get();
 	}
 
 	@Override
-	public Ticket_Table assignTicketToEmployeeByEmployee(Ticket_Table newTicket) {
+	public TicketTable assignTicketToEmployeeByEmployee(TicketTable newTicket) {
 		try {
 
 			return ticketRepository.save(newTicket);
@@ -61,7 +61,7 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public Ticket_Table updateTicketByEmployeeForSolution(Ticket_Table newTicket) {
+	public TicketTable updateTicketByEmployeeForSolution(TicketTable newTicket) {
 		try {
 
 			return ticketRepository.save(newTicket);
@@ -73,11 +73,11 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
-	public List<Ticket_Table> getTicketList(Long empId) {
-		List<Ticket_Table> responseList = new ArrayList<Ticket_Table>();
-		List<Ticket_Table> ticketList = ticketRepository.FindTicketByEmployee(empId);
-		for (Ticket_Table tickets : ticketList) {
-			Ticket_Table ticket = new Ticket_Table();
+	public List<TicketTable> getTicketList(Long empId) {
+		List<TicketTable> responseList = new ArrayList<TicketTable>();
+		List<TicketTable> ticketList = ticketRepository.FindTicketByEmployee(empId);
+		for (TicketTable tickets : ticketList) {
+			TicketTable ticket = new TicketTable();
 			ticket.setId(tickets.getId());
 			ticket.setCustId(tickets.getCustId());
 			ticket.setTitle(tickets.getTitle());

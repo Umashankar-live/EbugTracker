@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CustomerService } from 'src/service/customer.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from 'src/service/notification.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class RaiseTicketComponent implements OnInit {
   imageName: any;
 
 
-  constructor(private route: Router, private httpClient: HttpClient, private customerService: CustomerService, private fb: FormBuilder) { }
+  constructor(private route: Router, private httpClient: HttpClient, private customerService: CustomerService, private fb: FormBuilder,private notifyService : NotificationService) { }
 
   ngOnInit(): void {
     this.reactiveForms = this.fb.group({
@@ -55,18 +56,28 @@ export class RaiseTicketComponent implements OnInit {
       this.message = "Ticket raised successfully";
       this.customerService.raiseTicket(formData).subscribe((response) => {
         console.log(response);
-        alert("The Ticket is Successfully Raised !!! ")
+       this.showToasterSuccess();
         this.route.navigate(['/customer/dashboard/bugDetails/'])
 
       })
 
     } else {
       this.error = "Unable to raise ticket";
+      this.showToasterFailure();
       setTimeout(() => {
         this.error = null;
       }, 5000);
     }
     submitForm.reset();
   }
+
+
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Ticket Successfully Raised !!", "Raise Ticket");
+} 
+
+showToasterFailure(){
+  this.notifyService.showError("Ticket Failed to Raised !!", "Raise Ticket");
+} 
 
 }

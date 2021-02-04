@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.entity.EmployeeTable;
 import com.cg.ebug.dao.EmployeeDao;
 import com.cg.ebug.exception.EbugException;
 import com.cg.ebug.exception.NoValueFoundException;
@@ -25,10 +25,10 @@ public class UserServiceImpl implements UserServiceInterface {
 	 * This Function is used to add User
 	 */
 	@Override
-	public Employee_Table addUser(Employee_Table user) {
+	public EmployeeTable addUser(EmployeeTable user) {
 		try {
-			List<Employee_Table> EmployeeList = userDao.findAll();
-			for (Employee_Table isExists : EmployeeList) {
+			List<EmployeeTable> EmployeeList = userDao.findAll();
+			for (EmployeeTable isExists : EmployeeList) {
 				if (isExists.getEmailId().equalsIgnoreCase(user.getEmailId())) {
 					throw new EbugException("Customer already Exists");
 				}
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserServiceInterface {
 	 */
 	@Override
 	public void deleteUser(Long userId) {
-		Employee_Table user=this.userDao.findAll().stream().filter(x -> userId.equals(x.getEmpId())).findAny().orElse(null);
+		EmployeeTable user=this.userDao.findAll().stream().filter(x -> userId.equals(x.getEmpId())).findAny().orElse(null);
 		if(user==null) {
 			logger.warn("check the userId is correct or not");
 			throw new NotPossibleException("Given ID is not present so User Deletion operation is not possible...");
@@ -61,8 +61,8 @@ public class UserServiceImpl implements UserServiceInterface {
 	 * This Function is used to search the user
 	 */
 	@Override
-	public Employee_Table searchUser(Long userId) {
-		Employee_Table user = this.userDao.findAll().stream().filter(x -> userId.equals(x.getEmpId())).findAny().orElse(null);
+	public EmployeeTable searchUser(Long userId) {
+		EmployeeTable user = this.userDao.findAll().stream().filter(x -> userId.equals(x.getEmpId())).findAny().orElse(null);
 		if(user==null) {
 			logger.warn("check the userId is correct or not");
 			throw new NoValueFoundException("No such User is available...");
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserServiceInterface {
 	 * This Function is used to update the user
 	 */
 	@Override
-	public Employee_Table updateUser(Employee_Table user) {
+	public EmployeeTable updateUser(EmployeeTable user) {
         if(this.userDao.save(user) == null)
 			throw new NotPossibleException("Cannot update this user...");
 		return this.userDao.save(user);
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserServiceInterface {
 	 * This function is used to get all user 
 	 */
 	@Override
-	public List<Employee_Table> getAllUser() {
+	public List<EmployeeTable> getAllUser() {
 		if(this.userDao.getEmployeeList() == null) {
 			 logger.warn("Check if database is empty or not");
 			 throw new NoValueFoundException("There is no user in Table...");

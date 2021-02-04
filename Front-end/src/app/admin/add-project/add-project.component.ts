@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { Project } from 'src/models/project.model';
 import { AdminService } from 'src/service/admin.service';
 import { NotificationService } from 'src/service/notification.service';
@@ -18,7 +18,7 @@ export class AddProjectComponent implements OnInit {
   isexist: boolean = false;
 
 
-  constructor(private service : AdminService,private notifyService : NotificationService) {
+  constructor( private router: Router,private service : AdminService,private notifyService : NotificationService) {
        this.project = new Project() ;
        this.project.backendTechno = null ;
        this.project.frontendTechno = null ;
@@ -38,15 +38,22 @@ export class AddProjectComponent implements OnInit {
         this.isadded = true;
         console.log(data);
         this.pro = data;
-        this.showToasterSuccess();
+        this.router.navigate(["/admin/dashboard/listProject"]);
+        
       },
       error => {
         this.isexist = true;
+        this.showToasterFailure();
       })
   }
 
-  showToasterSuccess(){
-    this.notifyService.showSuccess("Data Successfully added !!", "EBug-Tracker");
-}
+   showToasterSuccess(){
+    this.notifyService.showSuccess("Data Successfully added !!", "Added Project");
+} 
+
+
+ showToasterFailure(){
+   this.notifyService.showError("Data Failed to Add","Added Project")
+ }
 
 }

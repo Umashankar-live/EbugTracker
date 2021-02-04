@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router' ;
 import { Ticket } from 'src/models/ticket.model';
 import {EmployeeService} from 'src/service/employee.service';
+import { NotificationService } from 'src/service/notification.service';
 
 @Component({
   selector: 'app-send-solution',
@@ -37,7 +38,7 @@ export class SendSolutionComponent implements OnInit {
   currentTitle : string 
   sendSolution : string
 
-  constructor(private route : Router , private service : EmployeeService) { }
+  constructor(private route : Router , private service : EmployeeService,private notifyService : NotificationService) { }
 
   ngOnInit() {
 
@@ -96,13 +97,18 @@ export class SendSolutionComponent implements OnInit {
     
       this.service.sendSolution(raisedTicket,this.ticketId ).subscribe(res => {
         console.log(res)
-        this.isUpdated = true
+        //this.isUpdated = true
+        this.showToasterSuccess();
        
 
       })
     }
 
   }
+
+  showToasterSuccess(){
+    this.notifyService.showSuccess("Solution Successfully Sent !!", "Send Solution");
+} 
 
   reload() {
     this.ngOnInit();

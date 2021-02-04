@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Employee_Table {
+public class EmployeeTable {
 	
 	@Id
 	@Column
@@ -33,13 +33,13 @@ public class Employee_Table {
 	
 	
 	
-	public Employee_Table() {
+	public EmployeeTable() {
 		super();
 	}
 
 
 
-	public Employee_Table(long empId, String firstName, String lastName, String projectName, String emailId,
+	public EmployeeTable(long empId, String firstName, String lastName, String projectName, String emailId,
 			long mobileNo, String password, String role) {
 		super();
 		this.empId = empId;

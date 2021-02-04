@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/models/employee.model';
 import { LoginserviceService } from 'src/service/loginservice.service';
 import {EmployeeService} from 'src/service/employee.service';
+import { NotificationService } from 'src/service/notification.service';
 
 @Component({
   selector: 'app-appoint-employee',
@@ -34,7 +35,8 @@ export class AppointEmployeeComponent implements OnInit {
   
  
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService, private employeeService : EmployeeService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService, 
+    private employeeService : EmployeeService,private notifyService: NotificationService) { }
 
   ngOnInit() {
 
@@ -81,11 +83,16 @@ export class AppointEmployeeComponent implements OnInit {
       data => {
         console.log("response received");
         console.log(data);
-        alert("Raised Ticket is Assigned to Employee !!!")
+        this.showToasterSuccess();
         this.router.navigate(["/employee/dashboard"]);
         
       })
     
   }
+
+  showToasterSuccess() {
+    this.notifyService.showSuccess(" Ticket Assigned To Other Employee !!", "Assign Ticket");
+  }
+
 
 }

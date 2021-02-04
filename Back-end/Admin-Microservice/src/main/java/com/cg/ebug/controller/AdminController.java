@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.ebug.entity.Employee_Table;
-import com.cg.ebug.entity.Project_Table;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.EmployeeTable;
+import com.cg.ebug.entity.ProjectTable;
+import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.exception.UserAlreadyRegisterd;
 import com.cg.ebug.service.IAdminService;
 
@@ -39,67 +39,67 @@ public class AdminController {
 	private IAdminService adminService;
 
 	@PostMapping(path = "/registerEmployee")
-	ResponseEntity<Employee_Table> registerEmployee(@RequestBody Employee_Table employee) {
-		Employee_Table response = adminService.registerEmployee(employee);
+	ResponseEntity<EmployeeTable> registerEmployee(@RequestBody EmployeeTable employee) {
+		EmployeeTable response = adminService.registerEmployee(employee);
 		if (response == null) {
 
 			throw new UserAlreadyRegisterd("400", "User Already Register");
 		}
-		return new ResponseEntity<Employee_Table>(response, HttpStatus.OK);
+		return new ResponseEntity<EmployeeTable>(response, HttpStatus.OK);
 	}
 
 	@GetMapping("/updateticketList")
-	ResponseEntity<List<Ticket_Table>> getAllTicketForUpdate() {
-		return new ResponseEntity<List<Ticket_Table>>(adminService.updateticketList(), HttpStatus.OK);
+	ResponseEntity<List<TicketTable>> getAllTicketForUpdate() {
+		return new ResponseEntity<List<TicketTable>>(adminService.updateticketList(), HttpStatus.OK);
 	}
 
 	@GetMapping("/tickets")
-	ResponseEntity<List<Ticket_Table>> getAllTickets() {
-		return new ResponseEntity<List<Ticket_Table>>(adminService.getAllTickets(), HttpStatus.OK);
+	ResponseEntity<List<TicketTable>> getAllTickets() {
+		return new ResponseEntity<List<TicketTable>>(adminService.getAllTickets(), HttpStatus.OK);
 	}
 
 	@GetMapping("/tickets/{ticketId}")
-	ResponseEntity<Ticket_Table> getTicketById(@PathVariable("ticketId") Long id) {
-		return new ResponseEntity<Ticket_Table>(adminService.getTicketById(id), HttpStatus.OK);
+	ResponseEntity<TicketTable> getTicketById(@PathVariable("ticketId") Long id) {
+		return new ResponseEntity<TicketTable>(adminService.getTicketById(id), HttpStatus.OK);
 	}
 
 	@PutMapping("/updateticket/{ticketId}")
-	ResponseEntity<Ticket_Table> updateTicketsByAdmin(@RequestBody Ticket_Table ticket,
+	ResponseEntity<TicketTable> updateTicketsByAdmin(@RequestBody TicketTable ticket,
 			@PathVariable("ticketId") Long ticketId) {
-		Ticket_Table newTicket = this.adminService.getTicketById(ticketId);
+		TicketTable newTicket = this.adminService.getTicketById(ticketId);
 		System.out.println(newTicket);
 		newTicket.setCriticalLevel(ticket.getCriticalLevel());
 		newTicket.setStatus(ticket.getStatus());
 		newTicket.setProjectName(ticket.getProjectName());
 
-		return new ResponseEntity<Ticket_Table>(adminService.updateTicketByAdmin(newTicket), HttpStatus.OK);
+		return new ResponseEntity<TicketTable>(adminService.updateTicketByAdmin(newTicket), HttpStatus.OK);
 	}
 
 	@GetMapping("/assignticket/{ticketID}/{empID}/{empName}")
-	ResponseEntity<Ticket_Table> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @PathVariable("empID") Long empId,
+	ResponseEntity<TicketTable> assignTicketToEmployeeByAdmin(@PathVariable("ticketID") Long ticketId, @PathVariable("empID") Long empId,
 			@PathVariable("empName") String employeeName) {
-		Ticket_Table newTicket = this.adminService.getTicketById(ticketId);
+		TicketTable newTicket = this.adminService.getTicketById(ticketId);
 		System.out.println(newTicket);
 		newTicket.setAssignedToEmployee(empId);
 		newTicket.setEmployeeName(employeeName);
 		newTicket.setIsAssigned(true);
-		return new ResponseEntity<Ticket_Table>(adminService.assignTicketToEmployeeByAdmin(newTicket), HttpStatus.OK);
+		return new ResponseEntity<TicketTable>(adminService.assignTicketToEmployeeByAdmin(newTicket), HttpStatus.OK);
 	}
 
 	// Project
 	@PostMapping("/createproject")
-	ResponseEntity<Project_Table> createTickets(@RequestBody Project_Table project) {
-		return new ResponseEntity<Project_Table>(adminService.addProject(project), HttpStatus.OK);
+	ResponseEntity<ProjectTable> createTickets(@RequestBody ProjectTable project) {
+		return new ResponseEntity<ProjectTable>(adminService.addProject(project), HttpStatus.OK);
 	}
 
 	@GetMapping("/getproject")
-	ResponseEntity<List<Project_Table>> getAllProject() {
-		return new ResponseEntity<List<Project_Table>>(adminService.getAllProject(), HttpStatus.OK);
+	ResponseEntity<List<ProjectTable>> getAllProject() {
+		return new ResponseEntity<List<ProjectTable>>(adminService.getAllProject(), HttpStatus.OK);
 	}
 
 	@GetMapping("/getproject/{id}")
-	ResponseEntity<Project_Table> getProjectByID(@PathVariable("id") Long id) {
-		return new ResponseEntity<Project_Table>(adminService.getProjectByID(id), HttpStatus.OK);
+	ResponseEntity<ProjectTable> getProjectByID(@PathVariable("id") Long id) {
+		return new ResponseEntity<ProjectTable>(adminService.getProjectByID(id), HttpStatus.OK);
 	}
 
 	// count of field

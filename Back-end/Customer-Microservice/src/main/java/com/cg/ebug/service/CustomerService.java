@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.ebug.dao.Ticket_Repository;
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.TicketTable;
 
 @Service
 @Transactional
@@ -24,9 +24,9 @@ public class CustomerService implements ICustomerService {
 	private Ticket_Repository ticketRepository;
 
 	@Override
-	public Ticket_Table viewTicketById(Long id) {
+	public TicketTable viewTicketById(Long id) {
 		try {
-			Optional<Ticket_Table> data = ticketRepository.findTicketById(id);
+			Optional<TicketTable> data = ticketRepository.findTicketById(id);
 			if (data.isPresent())
 				return data.get();
 		} catch (Exception e) {
@@ -37,7 +37,7 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public Ticket_Table updateTicketByCustomer(Ticket_Table ticket) {
+	public TicketTable updateTicketByCustomer(TicketTable ticket) {
 		try {
 			return ticketRepository.save(ticket);
 			
@@ -49,11 +49,11 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public List<Ticket_Table> getAllTicketsByCustomerId(long custId) {
-		List<Ticket_Table> responseList = new ArrayList<Ticket_Table>();
-		List<Ticket_Table> ticketList = ticketRepository.findTicketsByCustId(custId);
-		for (Ticket_Table tickets : ticketList) {
-			Ticket_Table ticket = new Ticket_Table();
+	public List<TicketTable> getAllTicketsByCustomerId(long custId) {
+		List<TicketTable> responseList = new ArrayList<TicketTable>();
+		List<TicketTable> ticketList = ticketRepository.findTicketsByCustId(custId);
+		for (TicketTable tickets : ticketList) {
+			TicketTable ticket = new TicketTable();
 			ticket.setId(tickets.getId());
 			ticket.setCustId(tickets.getCustId());
 			ticket.setTitle(tickets.getTitle());

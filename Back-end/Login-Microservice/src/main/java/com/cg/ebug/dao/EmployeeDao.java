@@ -6,18 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.entity.EmployeeTable;
 
 
 @Repository
-public interface EmployeeDao extends JpaRepository<Employee_Table, Long> {
+public interface EmployeeDao extends JpaRepository<EmployeeTable, Long> {
 
 	
 	
 	@Query(value = "Select * from EMPLOYEE_TABLE a where a.role = 'employee' ",  nativeQuery = true)
-	List<Employee_Table> getEmployeeList();
+	List<EmployeeTable> getEmployeeList();
 
-	Employee_Table findByEmailIdAndPassword(String tempEmaiId, String tempPassword);
+	EmployeeTable findByEmailIdAndPassword(String tempEmaiId, String tempPassword);
 
 	
 	

@@ -2,18 +2,18 @@ package com.cg.ebug.service;
 
 import java.util.List;
 
-import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.entity.EmployeeTable;
 
 public interface UserServiceInterface {
 
-	public Employee_Table addUser(Employee_Table user);
+	public EmployeeTable addUser(EmployeeTable user);
 
 	public void deleteUser(Long userId);
 
-	public Employee_Table searchUser(Long userId);
+	public EmployeeTable searchUser(Long userId);
 	
-	public List<Employee_Table> getAllUser();
+	public List<EmployeeTable> getAllUser();
 
-	public Employee_Table updateUser(Employee_Table user);
+	public EmployeeTable updateUser(EmployeeTable user);
 
 }

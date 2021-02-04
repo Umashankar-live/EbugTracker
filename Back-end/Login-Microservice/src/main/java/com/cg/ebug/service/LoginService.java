@@ -1,13 +1,13 @@
 package com.cg.ebug.service;
 
-import com.cg.ebug.entity.Employee_Table;
+import com.cg.ebug.entity.EmployeeTable;
 
 public interface LoginService {
 
 	
 
-	public Employee_Table addUser(Employee_Table user);
+	public EmployeeTable addUser(EmployeeTable user);
 
-	public Employee_Table getUserByEmailIdAndPassword(String tempEmailId, String tempPassword);
+	public EmployeeTable getUserByEmailIdAndPassword(String tempEmailId, String tempPassword);
 
 }

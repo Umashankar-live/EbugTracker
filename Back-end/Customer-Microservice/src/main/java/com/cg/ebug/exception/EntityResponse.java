@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 
-import com.cg.ebug.entity.Ticket_Table;
+import com.cg.ebug.entity.TicketTable;
 
 public class EntityResponse {
 
@@ -15,8 +15,8 @@ public class EntityResponse {
 	private boolean error;
 	
 	
-	private Ticket_Table ticketTable;
-	private List<Ticket_Table> listOfTickets;
+	private TicketTable ticketTable;
+	private List<TicketTable> listOfTickets;
 	
 	public EntityResponse(Date timeStamp, String message, String details) {
 		super();
@@ -69,25 +69,25 @@ public class EntityResponse {
 	
 
 
-	public Ticket_Table getTicketTable() {
+	public TicketTable getTicketTable() {
 		return ticketTable;
 	}
 
 
 
-	public void setTicketTable(Ticket_Table ticketTable) {
+	public void setTicketTable(TicketTable ticketTable) {
 		this.ticketTable = ticketTable;
 	}
 
 
 
-	public List<Ticket_Table> getListOfTickets() {
+	public List<TicketTable> getListOfTickets() {
 		return listOfTickets;
 	}
 
 
 
-	public void setListOfTickets(List<Ticket_Table> listOfTickets) {
+	public void setListOfTickets(List<TicketTable> listOfTickets) {
 		this.listOfTickets = listOfTickets;
 	}
 	

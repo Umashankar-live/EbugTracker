@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/models/employee.model';
 import { LoginserviceService } from 'src/service/loginservice.service';
-import {AdminService} from 'src/service/admin.service';
+import { AdminService } from 'src/service/admin.service';
+import { NotificationService } from 'src/service/notification.service';
 
 
 @Component({
@@ -11,15 +12,15 @@ import {AdminService} from 'src/service/admin.service';
   styleUrls: ['./select-employee.component.css']
 })
 export class SelectEmployeeComponent implements OnInit {
-  
+
   ticketId: number;
   employee: Employee[] = [];
-  tempEmployee : Employee[] = [] ;
+  tempEmployee: Employee[] = [];
   isLoading: boolean = true;
-  employeeBean : Employee ;
+  employeeBean: Employee;
 
-  bucketSize: number = 5 ;
-  page : number = 1 ;
+  bucketSize: number = 5;
+  page: number = 1;
 
   //Flags required for interactive UI
   isAdded: boolean = null
@@ -32,11 +33,11 @@ export class SelectEmployeeComponent implements OnInit {
   sortedByDes: boolean = null
   isDeleteError: boolean = false
   sortedByEmployeeId: boolean = false;
-  
-  
- 
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService, private adminService : AdminService) { }
+
+
+
+  constructor(private route: ActivatedRoute, private router: Router, private service: LoginserviceService, private adminService: AdminService, private notifyService: NotificationService) { }
 
   ngOnInit() {
 
@@ -44,7 +45,7 @@ export class SelectEmployeeComponent implements OnInit {
     console.log(this.ticketId);
     this.service.fetchAllEmployee().subscribe(data => {
       this.employee = data;
-      this.tempEmployee = data ;
+      this.tempEmployee = data;
       console.log(this.employee);
       this.isLoading = false
     });
@@ -72,22 +73,26 @@ export class SelectEmployeeComponent implements OnInit {
   onKeyUpAll(event: any) {
     this.employee = this.employee.filter(EmployeeBean => EmployeeBean.firstName.includes(event.target.value))
     if (event.target.value == '' || event.target.value == undefined) {
-      this.employee = this.tempEmployee ;
+      this.employee = this.tempEmployee;
     }
   }
 
-  
-  selectEmployee(empId: number,empName : string){
 
-    this.adminService.assignTicket(empId ,empName, this.ticketId).subscribe(
+  selectEmployee(empId: number, empName: string) {
+
+    this.adminService.assignTicket(empId, empName, this.ticketId).subscribe(
       data => {
         console.log("response received");
         console.log(data);
-        alert("Raised Ticket is Assigned to Employee !!!")
+        this.showToasterSuccess();
         this.router.navigate(["/admin/dashboard"]);
-        
+
       })
-    
+
+  }
+
+  showToasterSuccess() {
+    this.notifyService.showSuccess("Raised Ticket is Assigned to Employee !!", "Assign Ticket");
   }
 
 
