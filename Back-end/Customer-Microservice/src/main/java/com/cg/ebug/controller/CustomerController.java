@@ -1,18 +1,7 @@
 package com.cg.ebug.controller;
 
-/*
- * @Autowired - The process of injection spring bean dependencies while initializing it
- * @RequestMapping - for configuring URI mapping in controller handler methods 
- * @PathVariable -  for mapping dynamic values from the URI to handler method arguments.
- * @CrossOrigin - enables cross-origin resource sharing only for this specific method. By default, its allows all origins, 
- *                all headers, and the HTTP methods specified in the @RequestMapping annotation
- * @ResponseBody - annotation maps the HttpRequest body to a transfer or domain object
- */
-
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.zip.Deflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +20,15 @@ import com.cg.ebug.dao.Ticket_Repository;
 import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.exception.EntityResponse;
 import com.cg.ebug.service.ICustomerService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+/*
+ * @Autowired - The process of injection spring bean dependencies while initializing it
+ * @RequestMapping - for configuring URI mapping in controller handler methods 
+ * @PathVariable -  for mapping dynamic values from the URI to handler method arguments.
+ * @CrossOrigin - enables cross-origin resource sharing only for this specific method. By default, its allows all origins, 
+ *                all headers, and the HTTP methods specified in the @RequestMapping annotation
+ * @ResponseBody - annotation maps the HttpRequest body to a transfer or domain object
+ */
 
 @RestController
 @CrossOrigin("http://localhost:4200")
@@ -73,30 +70,18 @@ public class CustomerController {
 		return new ResponseEntity<TicketTable>(this.customerService.updateTicketByCustomer(newTicket), HttpStatus.OK);
 	}
 
-	@SuppressWarnings("unused")
 	@PostMapping("/upload")
-	public EntityResponse uplaodImage(@RequestParam("user") String user, @RequestParam("customerId") String custId,
-			@RequestParam("file") MultipartFile file) throws IOException {
+	public EntityResponse uplaodImage( @RequestParam("user") String user ,@RequestParam("customerId") String custId, @RequestParam("file") MultipartFile file) throws IOException {
 
-		System.out.println("Original Image Byte Size - " + file.getBytes().length);
 		EntityResponse response = new EntityResponse();
-		long customerId = Long.parseLong(custId);
-		TicketTable ticket = new ObjectMapper().readValue(user, TicketTable.class);
-
-		TicketTable record = new TicketTable(customerId, ticket.getTitle(), ticket.getDescription(),
-				file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
-		record.setIsResolved(false);
-		record.setSolution("pending");
-		record.setStatus("open");
-		record.setIsAssigned(false);
-		record.setCriticalLevel("low");
-		if (record != null) {
+		TicketTable record = customerService.raiseTicket(user, custId, file);
+		if(record != null) {
 			ticketRepository.save(record);
 			response.setMessage("Ticket Raised successfully");
 			response.setError(false);
 			response.setTicketTable(record);
 			return response;
-		} else {
+		}else {
 			response.setMessage("Couldn't raise ticket");
 			response.setError(true);
 			return response;
@@ -118,27 +103,6 @@ public class CustomerController {
 			return responseList;
 		}
 
-	}
-
-	// compress the image bytes before storing it in the database
-	public static byte[] compressBytes(byte[] data) {
-		Deflater deflater = new Deflater();
-		deflater.setInput(data);
-		deflater.finish();
-
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-		byte[] buffer = new byte[1024];
-		while (!deflater.finished()) {
-			int count = deflater.deflate(buffer);
-			outputStream.write(buffer, 0, count);
-		}
-		try {
-			outputStream.close();
-		} catch (IOException e) {
-		}
-		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
-
-		return outputStream.toByteArray();
 	}
 
 }

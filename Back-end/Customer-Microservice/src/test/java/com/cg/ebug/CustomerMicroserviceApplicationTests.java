@@ -87,6 +87,16 @@ class CustomerMicroserviceApplicationTests {
 		assertThat(expected).isNotNull();
 	}
 
-	
+	@Test
+	public void raiseTicketTest() {
+		final Long id = 1L ;
+		byte[] bytes = new byte[120];
+		final TicketTable ticket = new TicketTable(1L, 1001, "title", "description", "solution", "name", "type", bytes,
+				"open", "low", false, 1001, "employeeName", false, "projectName");
+		
+		when(ticketRepository.save(ticket)).thenReturn(ticket);
+		Optional<TicketTable> record = ticketRepository.findById(id);
+		assertNotNull(record);
+	}
 
 }
