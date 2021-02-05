@@ -103,7 +103,7 @@ public class CustomerService implements ICustomerService {
 			TicketTable record = new TicketTable(customerId, ticket.getTitle(), ticket.getDescription(), file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
 			record.setIsResolved(false);
 			record.setSolution("Pending");
-			record.setStatus("Pending");
+			record.setStatus("pending");
 			record.setIsAssigned(false);
 			record.setCriticalLevel("low");
 			return ticketRepository.save(record);
