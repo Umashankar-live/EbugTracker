@@ -25,7 +25,7 @@ import com.cg.ebug.service.ICustomerService;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
-class CustomerMicroserviceApplicationTests{
+class CustomerMicroserviceApplicationTests {
 	
 	
 	@Autowired
