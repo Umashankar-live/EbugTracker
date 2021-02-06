@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.cg.ebug.dao.Ticket_Repository;
+import com.cg.ebug.dao.TicketRepository;
 import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.service.ICustomerService;
 
@@ -26,17 +26,17 @@ import com.cg.ebug.service.ICustomerService;
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 class CustomerMicroserviceApplicationTests {
-	
-	
+
+
 	@Autowired
 	private ICustomerService service;
 
 	@MockBean
-	private Ticket_Repository ticketRepository;
+	private TicketRepository ticketRepository;
 
 
 	@Test
-	public void getTicketsByCustIdTest() {
+	void getTicketsByCustIdTest() {
 
 		final Long custId = 1L ;
 		byte[] bytes = new byte[120];
@@ -61,7 +61,7 @@ class CustomerMicroserviceApplicationTests {
 	}
 
 	@Test
-	public void getTicketByIdTest() {
+	void getTicketByIdTest() {
 		final Long id = 1L ;
 		byte[] bytes = new byte[120];
 		final TicketTable t1 = new TicketTable(1L, 1001, "title", "description", "solution", "name", "type", bytes,
@@ -74,26 +74,26 @@ class CustomerMicroserviceApplicationTests {
 		assertThat(expected).isNotNull();
 
 	}
-	
+
 	@Test
-	public void updateTicketByCustTest() {
+	void updateTicketByCustTest() {
 		byte[] bytes = new byte[120];
 		final TicketTable ticket = new TicketTable(1L, 1001, "title", "description", "solution", "name", "type", bytes,
 				"open", "low", false, 1001, "employeeName", false, "projectName");
-		
+
 		when(ticketRepository.save(ticket)).thenReturn(ticket);
-		
+
 		final TicketTable expected = service.updateTicketByCustomer(ticket);
 		assertThat(expected).isNotNull();
 	}
 
 	@Test
-	public void raiseTicketTest() {
+	void raiseTicketTest() {
 		final Long id = 1L ;
 		byte[] bytes = new byte[120];
 		final TicketTable ticket = new TicketTable(1L, 1001, "title", "description", "solution", "name", "type", bytes,
 				"open", "low", false, 1001, "employeeName", false, "projectName");
-		
+
 		when(ticketRepository.save(ticket)).thenReturn(ticket);
 		Optional<TicketTable> record = ticketRepository.findById(id);
 		assertNotNull(record);

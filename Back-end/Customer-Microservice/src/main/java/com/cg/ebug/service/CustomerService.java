@@ -15,16 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cg.ebug.dao.Ticket_Repository;
+import com.cg.ebug.dao.TicketRepository;
 import com.cg.ebug.entity.TicketTable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 @Transactional
 public class CustomerService implements ICustomerService {
+	
 
 	@Autowired
-	private Ticket_Repository ticketRepository;
+	private TicketRepository ticketRepository;
 
 	@Override
 	public TicketTable viewTicketById(Long id) {
@@ -53,31 +54,32 @@ public class CustomerService implements ICustomerService {
 
 	@Override
 	public List<TicketTable> getAllTicketsByCustomerId(long custId) {
-		List<TicketTable> responseList = new ArrayList<TicketTable>();
-		List<TicketTable> ticketList = ticketRepository.findTicketsByCustId(custId);
-		for (TicketTable tickets : ticketList) {
-			TicketTable ticket = new TicketTable();
-			ticket.setId(tickets.getId());
-			ticket.setCustId(tickets.getCustId());
-			ticket.setTitle(tickets.getTitle());
-			ticket.setDescription(tickets.getDescription());
-			ticket.setSolution(tickets.getSolution());
-			ticket.setName(tickets.getName());
-			ticket.setType(tickets.getType());
-			ticket.setPicByte(decompressBytes(tickets.getPicByte()));
-			ticket.setStatus(tickets.getStatus());
-			ticket.setCriticalLevel(tickets.getCriticalLevel());
-			ticket.setIsResolved(tickets.getIsResolved());
-			ticket.setAssignedToEmployee(tickets.getAssignedToEmployee());
-			ticket.setIsAssigned(tickets.getIsAssigned());
-			ticket.setEmployeeName(tickets.getEmployeeName());
-			ticket.setProjectName(tickets.getProjectName());
-			responseList.add(ticket);
-		}
-		return responseList;
+	
+			List<TicketTable> responseList = new ArrayList<TicketTable>();
+			List<TicketTable> ticketList = ticketRepository.findTicketsByCustId(custId);
+			for (TicketTable tickets : ticketList) {
+				TicketTable ticket = new TicketTable();
+				ticket.setId(tickets.getId());
+				ticket.setCustId(tickets.getCustId());
+				ticket.setTitle(tickets.getTitle());
+				ticket.setDescription(tickets.getDescription());
+				ticket.setSolution(tickets.getSolution());
+				ticket.setName(tickets.getName());
+				ticket.setType(tickets.getType());
+				ticket.setPicByte(decompressBytes(tickets.getPicByte()));
+				ticket.setStatus(tickets.getStatus());
+				ticket.setCriticalLevel(tickets.getCriticalLevel());
+				ticket.setIsResolved(tickets.getIsResolved());
+				ticket.setAssignedToEmployee(tickets.getAssignedToEmployee());
+				ticket.setIsAssigned(tickets.getIsAssigned());
+				ticket.setEmployeeName(tickets.getEmployeeName());
+				ticket.setProjectName(tickets.getProjectName());
+				responseList.add(ticket);
+			}
+			return responseList;
+		
 	}
 
-	// uncompress the image bytes before returning it to the angular application
 	public static byte[] decompressBytes(byte[] data) {
 		Inflater inflater = new Inflater();
 		inflater.setInput(data);
@@ -90,8 +92,11 @@ public class CustomerService implements ICustomerService {
 			}
 			outputStream.close();
 		} catch (IOException ioe) {
+			
 		} catch (DataFormatException e) {
+			
 		}
+		
 		return outputStream.toByteArray();
 	}
 
@@ -113,7 +118,6 @@ public class CustomerService implements ICustomerService {
 		}
 	}
 	
-	// compress the image bytes before storing it in the database
 	public static byte[] compressBytes(byte[] data) {
 		Deflater deflater = new Deflater();
 		deflater.setInput(data);
@@ -128,9 +132,8 @@ public class CustomerService implements ICustomerService {
 		try {
 			outputStream.close();
 		} catch (IOException e) {
+			
 		}
-		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
-
 		return outputStream.toByteArray();
 	}
 }

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cg.ebug.dao.Ticket_Repository;
+import com.cg.ebug.dao.TicketRepository;
 import com.cg.ebug.entity.TicketTable;
 import com.cg.ebug.exception.EntityResponse;
 import com.cg.ebug.service.ICustomerService;
@@ -38,12 +38,11 @@ public class CustomerController {
 	private ICustomerService customerService;
 
 	@Autowired
-	private Ticket_Repository ticketRepository;
+	private TicketRepository ticketRepository;
 
 	@GetMapping(path = "/viewTicketById/{id}")
 	public EntityResponse viewTicketById(@PathVariable("id") Long id) {
-		// return new ResponseEntity<Ticket_Table>(customerService.viewTicketById(id),
-		// HttpStatus.OK);
+	
 		EntityResponse errorDetails = new EntityResponse();
 		TicketTable getTicket = customerService.viewTicketById(id);
 		if (getTicket != null) {
@@ -59,7 +58,7 @@ public class CustomerController {
 	}
 
 	@PutMapping("/updateTicketByCustomer/{ticketId}")
-	ResponseEntity<TicketTable> updateTicketsByCustomer(@RequestBody TicketTable ticket,
+	public ResponseEntity<TicketTable> updateTicketsByCustomer(@RequestBody TicketTable ticket,
 			@PathVariable("ticketId") Long ticketId) {
 		TicketTable newTicket = this.customerService.viewTicketById(ticketId);
 		System.out.println(newTicket);
@@ -92,7 +91,7 @@ public class CustomerController {
 	public List<TicketTable> getImage(@PathVariable("custId") Long custId) throws IOException {
 		EntityResponse response = new EntityResponse();
 		List<TicketTable> responseList = customerService.getAllTicketsByCustomerId(custId);
-		if (responseList != null && responseList.size() != 0) {
+		if (responseList != null && !responseList.isEmpty()) {
 			response.setMessage("Tickets Fetched successfully");
 			response.setError(false);
 			response.setListOfTickets(responseList);

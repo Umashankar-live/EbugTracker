@@ -29,7 +29,6 @@ public class EntityResponse {
 
 	public EntityResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 

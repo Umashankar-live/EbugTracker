@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.cg.ebug.entity.TicketTable;
 
-public interface Ticket_Repository extends JpaRepository<TicketTable, Long> {
+public interface TicketRepository extends JpaRepository<TicketTable, Long> {
 
 	Optional<TicketTable> findTicketById(Long id);
 

@@ -50,7 +50,6 @@ public class TicketTable {
 
 	public TicketTable() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public TicketTable(long custId, String title, String description, String name, String type, byte[] picByte) {
