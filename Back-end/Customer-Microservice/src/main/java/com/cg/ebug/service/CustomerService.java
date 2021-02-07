@@ -11,6 +11,8 @@ import java.util.zip.Inflater;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +25,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Transactional
 public class CustomerService implements ICustomerService {
 	
-
+	private static Logger logger = LoggerFactory.getLogger(CustomerService.class);
+	
 	@Autowired
 	private TicketRepository ticketRepository;
 
@@ -34,7 +37,7 @@ public class CustomerService implements ICustomerService {
 			if (data.isPresent())
 				return data.get();
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			logger.info(e.getMessage());
 			return null;
 		}
 		return null;
@@ -46,7 +49,7 @@ public class CustomerService implements ICustomerService {
 			return ticketRepository.save(ticket);
 			
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			logger.info(e.getMessage());
 			return null;
 		}
 
@@ -55,7 +58,7 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public List<TicketTable> getAllTicketsByCustomerId(long custId) {
 	
-			List<TicketTable> responseList = new ArrayList<TicketTable>();
+			List<TicketTable> responseList = new ArrayList<>();
 			List<TicketTable> ticketList = ticketRepository.findTicketsByCustId(custId);
 			for (TicketTable tickets : ticketList) {
 				TicketTable ticket = new TicketTable();
@@ -92,9 +95,9 @@ public class CustomerService implements ICustomerService {
 			}
 			outputStream.close();
 		} catch (IOException ioe) {
-			
+			logger.info(ioe.getMessage());
 		} catch (DataFormatException e) {
-			
+			logger.info(e.getMessage());
 		}
 		
 		return outputStream.toByteArray();
@@ -113,7 +116,7 @@ public class CustomerService implements ICustomerService {
 			record.setCriticalLevel("low");
 			return ticketRepository.save(record);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
+			logger.info(e.getMessage());
 			return null;
 		}
 	}
@@ -132,7 +135,7 @@ public class CustomerService implements ICustomerService {
 		try {
 			outputStream.close();
 		} catch (IOException e) {
-			
+			logger.info(e.getMessage());
 		}
 		return outputStream.toByteArray();
 	}

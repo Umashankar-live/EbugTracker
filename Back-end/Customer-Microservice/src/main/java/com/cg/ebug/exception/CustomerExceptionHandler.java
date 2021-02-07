@@ -13,13 +13,13 @@ public class CustomerExceptionHandler {
 	@org.springframework.web.bind.annotation.ExceptionHandler(EbugException.class)
 	public ResponseEntity<EntityResponse> handleEbugException(EbugException exception, WebRequest request){
 		EntityResponse errorDetails = new EntityResponse(new Date(), exception.getMessage(), request.getDescription(false));
-	  return new ResponseEntity<EntityResponse>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
+	  return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
 	public ResponseEntity<EntityResponse> handleGlobalException(Exception exception, WebRequest request){
 		EntityResponse errorDetails = new EntityResponse(new Date(), exception.getMessage(), request.getDescription(false));
-	  return new ResponseEntity<EntityResponse>(errorDetails,HttpStatus.NOT_FOUND);
+	  return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
 	}
 	
 }

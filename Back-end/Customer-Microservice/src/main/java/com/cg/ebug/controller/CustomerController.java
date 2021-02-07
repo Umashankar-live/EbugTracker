@@ -66,7 +66,7 @@ public class CustomerController {
 		newTicket.setDescription(ticket.getDescription());
 		newTicket.setIsResolved(ticket.getIsResolved());
 
-		return new ResponseEntity<TicketTable>(this.customerService.updateTicketByCustomer(newTicket), HttpStatus.OK);
+		return new ResponseEntity<>(this.customerService.updateTicketByCustomer(newTicket), HttpStatus.OK);
 	}
 
 	@PostMapping("/upload")
