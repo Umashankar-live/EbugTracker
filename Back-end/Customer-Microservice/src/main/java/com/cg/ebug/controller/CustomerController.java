@@ -1,6 +1,5 @@
 package com.cg.ebug.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,8 @@ public class CustomerController {
 	}
 
 	@PostMapping("/upload")
-	public EntityResponse uplaodImage( @RequestParam("user") String user ,@RequestParam("customerId") String custId, @RequestParam("file") MultipartFile file) throws IOException {
+	public EntityResponse uplaodImage( @RequestParam("user") String user ,@RequestParam("customerId") String custId,
+			@RequestParam("file") MultipartFile file){
 
 		EntityResponse response = new EntityResponse();
 		TicketTable record = customerService.raiseTicket(user, custId, file);
@@ -88,7 +88,7 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = { "/viewTicketByCustId/{custId}" })
-	public List<TicketTable> getImage(@PathVariable("custId") Long custId) throws IOException {
+	public List<TicketTable> getImage(@PathVariable("custId") Long custId) {
 		EntityResponse response = new EntityResponse();
 		List<TicketTable> responseList = customerService.getAllTicketsByCustomerId(custId);
 		if (responseList != null && !responseList.isEmpty()) {

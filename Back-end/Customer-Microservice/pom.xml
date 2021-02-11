@@ -44,6 +44,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,7 +73,18 @@
 		</dependency>
 
 	</dependencies>
-
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>maven-releases</name>
+			<url>http://localhost:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>maven-snapshots</name>
+			<url>http://localhost:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
